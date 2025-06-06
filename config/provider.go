@@ -8,9 +8,11 @@ import (
 	// Note(turkenh): we are importing this to embed provider schema document
 	_ "embed"
 
-	"github.com/valkiriaaquatica/provider-proxmoxve/config/lxc"
-	"github.com/valkiriaaquatica/provider-proxmoxve/config/vm"
 	ujconfig "github.com/upbound/upjet/pkg/config"
+	"github.com/valkiriaaquatica/provider-proxmoxve/config/disk"
+	"github.com/valkiriaaquatica/provider-proxmoxve/config/lxc"
+	"github.com/valkiriaaquatica/provider-proxmoxve/config/pool"
+	"github.com/valkiriaaquatica/provider-proxmoxve/config/vm"
 )
 
 const (
@@ -37,6 +39,8 @@ func GetProvider() *ujconfig.Provider {
 		// add custom config functions
 		vm.Configure,
 		lxc.Configure,
+		pool.Configure,
+		disk.Configure,
 	} {
 		configure(pc)
 	}
