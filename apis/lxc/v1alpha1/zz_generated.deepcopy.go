@@ -10,7 +10,7 @@ Copyright 2022 Upbound Inc.
 package v1alpha1
 
 import (
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	"github.com/crossplane/crossplane-runtime/apis/common/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 )
 
@@ -199,6 +199,11 @@ func (in *LxcObservation) DeepCopyInto(out *LxcObservation) {
 	if in.Cpuunits != nil {
 		in, out := &in.Cpuunits, &out.Cpuunits
 		*out = new(float64)
+		**out = **in
+	}
+	if in.CurrentNode != nil {
+		in, out := &in.CurrentNode, &out.CurrentNode
+		*out = new(string)
 		**out = **in
 	}
 	if in.Description != nil {
@@ -850,6 +855,11 @@ func (in *NetworkObservation) DeepCopyInto(out *NetworkObservation) {
 	if in.Hwaddr != nil {
 		in, out := &in.Hwaddr, &out.Hwaddr
 		*out = new(string)
+		**out = **in
+	}
+	if in.ID != nil {
+		in, out := &in.ID, &out.ID
+		*out = new(float64)
 		**out = **in
 	}
 	if in.IP != nil {

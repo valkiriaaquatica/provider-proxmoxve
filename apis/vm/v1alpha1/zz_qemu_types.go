@@ -13,72 +13,179 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CPUObservation struct {
+
+	// CPU affinity
+	Affinity *string `json:"affinity,omitempty" tf:"affinity,omitempty"`
+
+	// Number of CPU cores
+	Cores *float64 `json:"cores,omitempty" tf:"cores,omitempty"`
+
+	Flags []FlagsObservation `json:"flags,omitempty" tf:"flags,omitempty"`
+
+	// CPU limit
+	Limit *float64 `json:"limit,omitempty" tf:"limit,omitempty"`
+
+	// Enable NUMA
+	Numa *bool `json:"numa,omitempty" tf:"numa,omitempty"`
+
+	// Number of CPU sockets
+	Sockets *float64 `json:"sockets,omitempty" tf:"sockets,omitempty"`
+
+	// CPU type
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// CPU units
+	Units *float64 `json:"units,omitempty" tf:"units,omitempty"`
+
+	// Number of virtual cores
+	Vcores *float64 `json:"vcores,omitempty" tf:"vcores,omitempty"`
+}
+
+type CPUParameters struct {
+
+	// CPU affinity
+	// +kubebuilder:validation:Optional
+	Affinity *string `json:"affinity,omitempty" tf:"affinity,omitempty"`
+
+	// Number of CPU cores
+	// +kubebuilder:validation:Optional
+	Cores *float64 `json:"cores,omitempty" tf:"cores,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Flags []FlagsParameters `json:"flags,omitempty" tf:"flags,omitempty"`
+
+	// CPU limit
+	// +kubebuilder:validation:Optional
+	Limit *float64 `json:"limit,omitempty" tf:"limit,omitempty"`
+
+	// Enable NUMA
+	// +kubebuilder:validation:Optional
+	Numa *bool `json:"numa,omitempty" tf:"numa,omitempty"`
+
+	// Number of CPU sockets
+	// +kubebuilder:validation:Optional
+	Sockets *float64 `json:"sockets,omitempty" tf:"sockets,omitempty"`
+
+	// CPU type
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// CPU units
+	// +kubebuilder:validation:Optional
+	Units *float64 `json:"units,omitempty" tf:"units,omitempty"`
+
+	// Number of virtual cores
+	// +kubebuilder:validation:Optional
+	Vcores *float64 `json:"vcores,omitempty" tf:"vcores,omitempty"`
+}
+
+type CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type CloudinitObservation struct {
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+}
+
+type CloudinitParameters struct {
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+}
+
+type DeviceObservation struct {
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	Usb3 *bool `json:"usb3,omitempty" tf:"usb3,omitempty"`
+}
+
+type DeviceParameters struct {
+
+	// +kubebuilder:validation:Required
+	DeviceID *string `json:"deviceId" tf:"device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Usb3 *bool `json:"usb3,omitempty" tf:"usb3,omitempty"`
+}
+
 type DiskObservation struct {
-	Aio *string `json:"aio,omitempty" tf:"aio,omitempty"`
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
 
 	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
 
 	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
 
-	Discard *string `json:"discard,omitempty" tf:"discard,omitempty"`
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
 
-	File *string `json:"file,omitempty" tf:"file,omitempty"`
+	DiskFile *string `json:"diskFile,omitempty" tf:"disk_file,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
 
 	Format *string `json:"format,omitempty" tf:"format,omitempty"`
 
-	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
 
-	IopsMax *float64 `json:"iopsMax,omitempty" tf:"iops_max,omitempty"`
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
 
-	IopsMaxLength *float64 `json:"iopsMaxLength,omitempty" tf:"iops_max_length,omitempty"`
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
 
-	IopsRd *float64 `json:"iopsRd,omitempty" tf:"iops_rd,omitempty"`
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
 
-	IopsRdMax *float64 `json:"iopsRdMax,omitempty" tf:"iops_rd_max,omitempty"`
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
 
-	IopsRdMaxLength *float64 `json:"iopsRdMaxLength,omitempty" tf:"iops_rd_max_length,omitempty"`
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
 
-	IopsWr *float64 `json:"iopsWr,omitempty" tf:"iops_wr,omitempty"`
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
 
-	IopsWrMax *float64 `json:"iopsWrMax,omitempty" tf:"iops_wr_max,omitempty"`
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
 
-	IopsWrMaxLength *float64 `json:"iopsWrMaxLength,omitempty" tf:"iops_wr_max_length,omitempty"`
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
 
-	Iothread *float64 `json:"iothread,omitempty" tf:"iothread,omitempty"`
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
 
-	Mbps *float64 `json:"mbps,omitempty" tf:"mbps,omitempty"`
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
 
-	MbpsRd *float64 `json:"mbpsRd,omitempty" tf:"mbps_rd,omitempty"`
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
 
-	MbpsRdMax *float64 `json:"mbpsRdMax,omitempty" tf:"mbps_rd_max,omitempty"`
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
 
-	MbpsWr *float64 `json:"mbpsWr,omitempty" tf:"mbps_wr,omitempty"`
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
 
-	MbpsWrMax *float64 `json:"mbpsWrMax,omitempty" tf:"mbps_wr_max,omitempty"`
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
 
-	Media *string `json:"media,omitempty" tf:"media,omitempty"`
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
 
-	Replicate *float64 `json:"replicate,omitempty" tf:"replicate,omitempty"`
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
 
 	Size *string `json:"size,omitempty" tf:"size,omitempty"`
 
-	Slot *float64 `json:"slot,omitempty" tf:"slot,omitempty"`
-
-	Ssd *float64 `json:"ssd,omitempty" tf:"ssd,omitempty"`
+	Slot *string `json:"slot,omitempty" tf:"slot,omitempty"`
 
 	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
 
-	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
-
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	Volume *string `json:"volume,omitempty" tf:"volume,omitempty"`
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
 }
 
 type DiskParameters struct {
 
 	// +kubebuilder:validation:Optional
-	Aio *string `json:"aio,omitempty" tf:"aio,omitempty"`
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
@@ -87,82 +194,214 @@ type DiskParameters struct {
 	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Discard *string `json:"discard,omitempty" tf:"discard,omitempty"`
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	File *string `json:"file,omitempty" tf:"file,omitempty"`
+	DiskFile *string `json:"diskFile,omitempty" tf:"disk_file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Format *string `json:"format,omitempty" tf:"format,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	IopsMax *float64 `json:"iopsMax,omitempty" tf:"iops_max,omitempty"`
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	IopsMaxLength *float64 `json:"iopsMaxLength,omitempty" tf:"iops_max_length,omitempty"`
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	IopsRd *float64 `json:"iopsRd,omitempty" tf:"iops_rd,omitempty"`
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	IopsRdMax *float64 `json:"iopsRdMax,omitempty" tf:"iops_rd_max,omitempty"`
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	IopsRdMaxLength *float64 `json:"iopsRdMaxLength,omitempty" tf:"iops_rd_max_length,omitempty"`
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	IopsWr *float64 `json:"iopsWr,omitempty" tf:"iops_wr,omitempty"`
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	IopsWrMax *float64 `json:"iopsWrMax,omitempty" tf:"iops_wr_max,omitempty"`
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	IopsWrMaxLength *float64 `json:"iopsWrMaxLength,omitempty" tf:"iops_wr_max_length,omitempty"`
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Iothread *float64 `json:"iothread,omitempty" tf:"iothread,omitempty"`
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Mbps *float64 `json:"mbps,omitempty" tf:"mbps,omitempty"`
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	MbpsRd *float64 `json:"mbpsRd,omitempty" tf:"mbps_rd,omitempty"`
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	MbpsRdMax *float64 `json:"mbpsRdMax,omitempty" tf:"mbps_rd_max,omitempty"`
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	MbpsWr *float64 `json:"mbpsWr,omitempty" tf:"mbps_wr,omitempty"`
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	MbpsWrMax *float64 `json:"mbpsWrMax,omitempty" tf:"mbps_wr_max,omitempty"`
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Media *string `json:"media,omitempty" tf:"media,omitempty"`
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Replicate *float64 `json:"replicate,omitempty" tf:"replicate,omitempty"`
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
 
 	// +kubebuilder:validation:Required
-	Size *string `json:"size" tf:"size,omitempty"`
+	Slot *string `json:"slot" tf:"slot,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Slot *float64 `json:"slot,omitempty" tf:"slot,omitempty"`
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Ssd *float64 `json:"ssd,omitempty" tf:"ssd,omitempty"`
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type DisksObservation struct {
+	Ide []IdeObservation `json:"ide,omitempty" tf:"ide,omitempty"`
+
+	Sata []SataObservation `json:"sata,omitempty" tf:"sata,omitempty"`
+
+	Scsi []ScsiObservation `json:"scsi,omitempty" tf:"scsi,omitempty"`
+
+	Virtio []VirtioObservation `json:"virtio,omitempty" tf:"virtio,omitempty"`
+}
+
+type DisksParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Ide []IdeParameters `json:"ide,omitempty" tf:"ide,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Sata []SataParameters `json:"sata,omitempty" tf:"sata,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Scsi []ScsiParameters `json:"scsi,omitempty" tf:"scsi,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Virtio []VirtioParameters `json:"virtio,omitempty" tf:"virtio,omitempty"`
+}
+
+type EfidiskObservation struct {
+	Efitype *string `json:"efitype,omitempty" tf:"efitype,omitempty"`
+
+	PreEnrolledKeys *bool `json:"preEnrolledKeys,omitempty" tf:"pre_enrolled_keys,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+}
+
+type EfidiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Efitype *string `json:"efitype,omitempty" tf:"efitype,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	PreEnrolledKeys *bool `json:"preEnrolledKeys,omitempty" tf:"pre_enrolled_keys,omitempty"`
 
 	// +kubebuilder:validation:Required
 	Storage *string `json:"storage" tf:"storage,omitempty"`
+}
 
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+type FlagsObservation struct {
 
+	// CPU flag aes
+	Aes *string `json:"aes,omitempty" tf:"aes,omitempty"`
+
+	// CPU flag amd_no_ssb
+	AmdNoSsb *string `json:"amdNoSsb,omitempty" tf:"amd_no_ssb,omitempty"`
+
+	// CPU flag amd_ssbd
+	AmdSsbd *string `json:"amdSsbd,omitempty" tf:"amd_ssbd,omitempty"`
+
+	// CPU flag hv_evmcs
+	HvEvmcs *string `json:"hvEvmcs,omitempty" tf:"hv_evmcs,omitempty"`
+
+	// CPU flag hv_tlbflush
+	HvTlbflush *string `json:"hvTlbflush,omitempty" tf:"hv_tlbflush,omitempty"`
+
+	// CPU flag ibpb
+	Ibpb *string `json:"ibpb,omitempty" tf:"ibpb,omitempty"`
+
+	// CPU flag md_clear
+	MdClear *string `json:"mdClear,omitempty" tf:"md_clear,omitempty"`
+
+	// CPU flag pbpe1gb
+	Pbpe1Gb *string `json:"pbpe1gb,omitempty" tf:"pbpe1gb,omitempty"`
+
+	// CPU flag pcid
+	Pcid *string `json:"pcid,omitempty" tf:"pcid,omitempty"`
+
+	// CPU flag spec_ctrl
+	SpecCtrl *string `json:"specCtrl,omitempty" tf:"spec_ctrl,omitempty"`
+
+	// CPU flag ssbd
+	Ssbd *string `json:"ssbd,omitempty" tf:"ssbd,omitempty"`
+
+	// CPU flag virt_ssbd
+	VirtSsbd *string `json:"virtSsbd,omitempty" tf:"virt_ssbd,omitempty"`
+}
+
+type FlagsParameters struct {
+
+	// CPU flag aes
 	// +kubebuilder:validation:Optional
-	Volume *string `json:"volume,omitempty" tf:"volume,omitempty"`
+	Aes *string `json:"aes,omitempty" tf:"aes,omitempty"`
+
+	// CPU flag amd_no_ssb
+	// +kubebuilder:validation:Optional
+	AmdNoSsb *string `json:"amdNoSsb,omitempty" tf:"amd_no_ssb,omitempty"`
+
+	// CPU flag amd_ssbd
+	// +kubebuilder:validation:Optional
+	AmdSsbd *string `json:"amdSsbd,omitempty" tf:"amd_ssbd,omitempty"`
+
+	// CPU flag hv_evmcs
+	// +kubebuilder:validation:Optional
+	HvEvmcs *string `json:"hvEvmcs,omitempty" tf:"hv_evmcs,omitempty"`
+
+	// CPU flag hv_tlbflush
+	// +kubebuilder:validation:Optional
+	HvTlbflush *string `json:"hvTlbflush,omitempty" tf:"hv_tlbflush,omitempty"`
+
+	// CPU flag ibpb
+	// +kubebuilder:validation:Optional
+	Ibpb *string `json:"ibpb,omitempty" tf:"ibpb,omitempty"`
+
+	// CPU flag md_clear
+	// +kubebuilder:validation:Optional
+	MdClear *string `json:"mdClear,omitempty" tf:"md_clear,omitempty"`
+
+	// CPU flag pbpe1gb
+	// +kubebuilder:validation:Optional
+	Pbpe1Gb *string `json:"pbpe1gb,omitempty" tf:"pbpe1gb,omitempty"`
+
+	// CPU flag pcid
+	// +kubebuilder:validation:Optional
+	Pcid *string `json:"pcid,omitempty" tf:"pcid,omitempty"`
+
+	// CPU flag spec_ctrl
+	// +kubebuilder:validation:Optional
+	SpecCtrl *string `json:"specCtrl,omitempty" tf:"spec_ctrl,omitempty"`
+
+	// CPU flag ssbd
+	// +kubebuilder:validation:Optional
+	Ssbd *string `json:"ssbd,omitempty" tf:"ssbd,omitempty"`
+
+	// CPU flag virt_ssbd
+	// +kubebuilder:validation:Optional
+	VirtSsbd *string `json:"virtSsbd,omitempty" tf:"virt_ssbd,omitempty"`
 }
 
 type HostpciObservation struct {
@@ -175,8 +414,8 @@ type HostpciObservation struct {
 
 type HostpciParameters struct {
 
-	// +kubebuilder:validation:Optional
-	Host *string `json:"host,omitempty" tf:"host,omitempty"`
+	// +kubebuilder:validation:Required
+	Host *string `json:"host" tf:"host,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Pcie *float64 `json:"pcie,omitempty" tf:"pcie,omitempty"`
@@ -185,10 +424,1044 @@ type HostpciParameters struct {
 	Rombar *float64 `json:"rombar,omitempty" tf:"rombar,omitempty"`
 }
 
+type Ide0DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Ide0DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Ide0Observation struct {
+	Cdrom []CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Cloudinit []CloudinitObservation `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	Disk []Ide0DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Ide0Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cloudinit []CloudinitParameters `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Ide0DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Ide1CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Ide1CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Ide1CloudinitObservation struct {
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+}
+
+type Ide1CloudinitParameters struct {
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+}
+
+type Ide1DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Ide1DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Ide1Observation struct {
+	Cdrom []Ide1CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Cloudinit []Ide1CloudinitObservation `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	Disk []Ide1DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Ide1PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Ide1Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Ide1CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cloudinit []Ide1CloudinitParameters `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Ide1DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Ide1PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Ide1PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Ide1PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Ide2CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Ide2CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Ide2CloudinitObservation struct {
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+}
+
+type Ide2CloudinitParameters struct {
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+}
+
+type Ide2DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Ide2DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Ide2Observation struct {
+	Cdrom []Ide2CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Cloudinit []Ide2CloudinitObservation `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	Disk []Ide2DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Ide2PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Ide2Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Ide2CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cloudinit []Ide2CloudinitParameters `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Ide2DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Ide2PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Ide2PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Ide2PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Ide3CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Ide3CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Ide3CloudinitObservation struct {
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+}
+
+type Ide3CloudinitParameters struct {
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+}
+
+type Ide3DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Ide3DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Ide3Observation struct {
+	Cdrom []Ide3CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Cloudinit []Ide3CloudinitObservation `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	Disk []Ide3DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Ide3PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Ide3Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Ide3CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cloudinit []Ide3CloudinitParameters `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Ide3DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Ide3PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Ide3PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Ide3PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type IdeObservation struct {
+	Ide0 []Ide0Observation `json:"ide0,omitempty" tf:"ide0,omitempty"`
+
+	Ide1 []Ide1Observation `json:"ide1,omitempty" tf:"ide1,omitempty"`
+
+	Ide2 []Ide2Observation `json:"ide2,omitempty" tf:"ide2,omitempty"`
+
+	Ide3 []Ide3Observation `json:"ide3,omitempty" tf:"ide3,omitempty"`
+}
+
+type IdeParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Ide0 []Ide0Parameters `json:"ide0,omitempty" tf:"ide0,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ide1 []Ide1Parameters `json:"ide1,omitempty" tf:"ide1,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ide2 []Ide2Parameters `json:"ide2,omitempty" tf:"ide2,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ide3 []Ide3Parameters `json:"ide3,omitempty" tf:"ide3,omitempty"`
+}
+
+type MappingObservation struct {
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	MappingID *string `json:"mappingId,omitempty" tf:"mapping_id,omitempty"`
+
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type MappingParameters struct {
+
+	// +kubebuilder:validation:Optional
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	// +kubebuilder:validation:Required
+	MappingID *string `json:"mappingId" tf:"mapping_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
 type NetworkObservation struct {
 	Bridge *string `json:"bridge,omitempty" tf:"bridge,omitempty"`
 
 	Firewall *bool `json:"firewall,omitempty" tf:"firewall,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
 
 	LinkDown *bool `json:"linkDown,omitempty" tf:"link_down,omitempty"`
 
@@ -214,6 +1487,9 @@ type NetworkParameters struct {
 	// +kubebuilder:validation:Optional
 	Firewall *bool `json:"firewall,omitempty" tf:"firewall,omitempty"`
 
+	// +kubebuilder:validation:Required
+	ID *float64 `json:"id" tf:"id,omitempty"`
+
 	// +kubebuilder:validation:Optional
 	LinkDown *bool `json:"linkDown,omitempty" tf:"link_down,omitempty"`
 
@@ -237,17 +1513,1900 @@ type NetworkParameters struct {
 	Tag *float64 `json:"tag,omitempty" tf:"tag,omitempty"`
 }
 
+type PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Pci0Observation struct {
+	Mapping []MappingObservation `json:"mapping,omitempty" tf:"mapping,omitempty"`
+
+	Raw []RawObservation `json:"raw,omitempty" tf:"raw,omitempty"`
+}
+
+type Pci0Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Mapping []MappingParameters `json:"mapping,omitempty" tf:"mapping,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Raw []RawParameters `json:"raw,omitempty" tf:"raw,omitempty"`
+}
+
+type Pci10MappingObservation struct {
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	MappingID *string `json:"mappingId,omitempty" tf:"mapping_id,omitempty"`
+
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci10MappingParameters struct {
+
+	// +kubebuilder:validation:Optional
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	// +kubebuilder:validation:Required
+	MappingID *string `json:"mappingId" tf:"mapping_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci10Observation struct {
+	Mapping []Pci10MappingObservation `json:"mapping,omitempty" tf:"mapping,omitempty"`
+
+	Raw []Pci10RawObservation `json:"raw,omitempty" tf:"raw,omitempty"`
+}
+
+type Pci10Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Mapping []Pci10MappingParameters `json:"mapping,omitempty" tf:"mapping,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Raw []Pci10RawParameters `json:"raw,omitempty" tf:"raw,omitempty"`
+}
+
+type Pci10RawObservation struct {
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	RawID *string `json:"rawId,omitempty" tf:"raw_id,omitempty"`
+
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci10RawParameters struct {
+
+	// +kubebuilder:validation:Optional
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	// +kubebuilder:validation:Required
+	RawID *string `json:"rawId" tf:"raw_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci11MappingObservation struct {
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	MappingID *string `json:"mappingId,omitempty" tf:"mapping_id,omitempty"`
+
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci11MappingParameters struct {
+
+	// +kubebuilder:validation:Optional
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	// +kubebuilder:validation:Required
+	MappingID *string `json:"mappingId" tf:"mapping_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci11Observation struct {
+	Mapping []Pci11MappingObservation `json:"mapping,omitempty" tf:"mapping,omitempty"`
+
+	Raw []Pci11RawObservation `json:"raw,omitempty" tf:"raw,omitempty"`
+}
+
+type Pci11Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Mapping []Pci11MappingParameters `json:"mapping,omitempty" tf:"mapping,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Raw []Pci11RawParameters `json:"raw,omitempty" tf:"raw,omitempty"`
+}
+
+type Pci11RawObservation struct {
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	RawID *string `json:"rawId,omitempty" tf:"raw_id,omitempty"`
+
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci11RawParameters struct {
+
+	// +kubebuilder:validation:Optional
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	// +kubebuilder:validation:Required
+	RawID *string `json:"rawId" tf:"raw_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci12MappingObservation struct {
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	MappingID *string `json:"mappingId,omitempty" tf:"mapping_id,omitempty"`
+
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci12MappingParameters struct {
+
+	// +kubebuilder:validation:Optional
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	// +kubebuilder:validation:Required
+	MappingID *string `json:"mappingId" tf:"mapping_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci12Observation struct {
+	Mapping []Pci12MappingObservation `json:"mapping,omitempty" tf:"mapping,omitempty"`
+
+	Raw []Pci12RawObservation `json:"raw,omitempty" tf:"raw,omitempty"`
+}
+
+type Pci12Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Mapping []Pci12MappingParameters `json:"mapping,omitempty" tf:"mapping,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Raw []Pci12RawParameters `json:"raw,omitempty" tf:"raw,omitempty"`
+}
+
+type Pci12RawObservation struct {
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	RawID *string `json:"rawId,omitempty" tf:"raw_id,omitempty"`
+
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci12RawParameters struct {
+
+	// +kubebuilder:validation:Optional
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	// +kubebuilder:validation:Required
+	RawID *string `json:"rawId" tf:"raw_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci13MappingObservation struct {
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	MappingID *string `json:"mappingId,omitempty" tf:"mapping_id,omitempty"`
+
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci13MappingParameters struct {
+
+	// +kubebuilder:validation:Optional
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	// +kubebuilder:validation:Required
+	MappingID *string `json:"mappingId" tf:"mapping_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci13Observation struct {
+	Mapping []Pci13MappingObservation `json:"mapping,omitempty" tf:"mapping,omitempty"`
+
+	Raw []Pci13RawObservation `json:"raw,omitempty" tf:"raw,omitempty"`
+}
+
+type Pci13Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Mapping []Pci13MappingParameters `json:"mapping,omitempty" tf:"mapping,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Raw []Pci13RawParameters `json:"raw,omitempty" tf:"raw,omitempty"`
+}
+
+type Pci13RawObservation struct {
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	RawID *string `json:"rawId,omitempty" tf:"raw_id,omitempty"`
+
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci13RawParameters struct {
+
+	// +kubebuilder:validation:Optional
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	// +kubebuilder:validation:Required
+	RawID *string `json:"rawId" tf:"raw_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci14MappingObservation struct {
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	MappingID *string `json:"mappingId,omitempty" tf:"mapping_id,omitempty"`
+
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci14MappingParameters struct {
+
+	// +kubebuilder:validation:Optional
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	// +kubebuilder:validation:Required
+	MappingID *string `json:"mappingId" tf:"mapping_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci14Observation struct {
+	Mapping []Pci14MappingObservation `json:"mapping,omitempty" tf:"mapping,omitempty"`
+
+	Raw []Pci14RawObservation `json:"raw,omitempty" tf:"raw,omitempty"`
+}
+
+type Pci14Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Mapping []Pci14MappingParameters `json:"mapping,omitempty" tf:"mapping,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Raw []Pci14RawParameters `json:"raw,omitempty" tf:"raw,omitempty"`
+}
+
+type Pci14RawObservation struct {
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	RawID *string `json:"rawId,omitempty" tf:"raw_id,omitempty"`
+
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci14RawParameters struct {
+
+	// +kubebuilder:validation:Optional
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	// +kubebuilder:validation:Required
+	RawID *string `json:"rawId" tf:"raw_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci1MappingObservation struct {
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	MappingID *string `json:"mappingId,omitempty" tf:"mapping_id,omitempty"`
+
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci1MappingParameters struct {
+
+	// +kubebuilder:validation:Optional
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	// +kubebuilder:validation:Required
+	MappingID *string `json:"mappingId" tf:"mapping_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci1Observation struct {
+	Mapping []Pci1MappingObservation `json:"mapping,omitempty" tf:"mapping,omitempty"`
+
+	Raw []Pci1RawObservation `json:"raw,omitempty" tf:"raw,omitempty"`
+}
+
+type Pci1Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Mapping []Pci1MappingParameters `json:"mapping,omitempty" tf:"mapping,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Raw []Pci1RawParameters `json:"raw,omitempty" tf:"raw,omitempty"`
+}
+
+type Pci1RawObservation struct {
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	RawID *string `json:"rawId,omitempty" tf:"raw_id,omitempty"`
+
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci1RawParameters struct {
+
+	// +kubebuilder:validation:Optional
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	// +kubebuilder:validation:Required
+	RawID *string `json:"rawId" tf:"raw_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci2MappingObservation struct {
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	MappingID *string `json:"mappingId,omitempty" tf:"mapping_id,omitempty"`
+
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci2MappingParameters struct {
+
+	// +kubebuilder:validation:Optional
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	// +kubebuilder:validation:Required
+	MappingID *string `json:"mappingId" tf:"mapping_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci2Observation struct {
+	Mapping []Pci2MappingObservation `json:"mapping,omitempty" tf:"mapping,omitempty"`
+
+	Raw []Pci2RawObservation `json:"raw,omitempty" tf:"raw,omitempty"`
+}
+
+type Pci2Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Mapping []Pci2MappingParameters `json:"mapping,omitempty" tf:"mapping,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Raw []Pci2RawParameters `json:"raw,omitempty" tf:"raw,omitempty"`
+}
+
+type Pci2RawObservation struct {
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	RawID *string `json:"rawId,omitempty" tf:"raw_id,omitempty"`
+
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci2RawParameters struct {
+
+	// +kubebuilder:validation:Optional
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	// +kubebuilder:validation:Required
+	RawID *string `json:"rawId" tf:"raw_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci3MappingObservation struct {
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	MappingID *string `json:"mappingId,omitempty" tf:"mapping_id,omitempty"`
+
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci3MappingParameters struct {
+
+	// +kubebuilder:validation:Optional
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	// +kubebuilder:validation:Required
+	MappingID *string `json:"mappingId" tf:"mapping_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci3Observation struct {
+	Mapping []Pci3MappingObservation `json:"mapping,omitempty" tf:"mapping,omitempty"`
+
+	Raw []Pci3RawObservation `json:"raw,omitempty" tf:"raw,omitempty"`
+}
+
+type Pci3Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Mapping []Pci3MappingParameters `json:"mapping,omitempty" tf:"mapping,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Raw []Pci3RawParameters `json:"raw,omitempty" tf:"raw,omitempty"`
+}
+
+type Pci3RawObservation struct {
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	RawID *string `json:"rawId,omitempty" tf:"raw_id,omitempty"`
+
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci3RawParameters struct {
+
+	// +kubebuilder:validation:Optional
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	// +kubebuilder:validation:Required
+	RawID *string `json:"rawId" tf:"raw_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci4MappingObservation struct {
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	MappingID *string `json:"mappingId,omitempty" tf:"mapping_id,omitempty"`
+
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci4MappingParameters struct {
+
+	// +kubebuilder:validation:Optional
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	// +kubebuilder:validation:Required
+	MappingID *string `json:"mappingId" tf:"mapping_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci4Observation struct {
+	Mapping []Pci4MappingObservation `json:"mapping,omitempty" tf:"mapping,omitempty"`
+
+	Raw []Pci4RawObservation `json:"raw,omitempty" tf:"raw,omitempty"`
+}
+
+type Pci4Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Mapping []Pci4MappingParameters `json:"mapping,omitempty" tf:"mapping,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Raw []Pci4RawParameters `json:"raw,omitempty" tf:"raw,omitempty"`
+}
+
+type Pci4RawObservation struct {
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	RawID *string `json:"rawId,omitempty" tf:"raw_id,omitempty"`
+
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci4RawParameters struct {
+
+	// +kubebuilder:validation:Optional
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	// +kubebuilder:validation:Required
+	RawID *string `json:"rawId" tf:"raw_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci5MappingObservation struct {
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	MappingID *string `json:"mappingId,omitempty" tf:"mapping_id,omitempty"`
+
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci5MappingParameters struct {
+
+	// +kubebuilder:validation:Optional
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	// +kubebuilder:validation:Required
+	MappingID *string `json:"mappingId" tf:"mapping_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci5Observation struct {
+	Mapping []Pci5MappingObservation `json:"mapping,omitempty" tf:"mapping,omitempty"`
+
+	Raw []Pci5RawObservation `json:"raw,omitempty" tf:"raw,omitempty"`
+}
+
+type Pci5Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Mapping []Pci5MappingParameters `json:"mapping,omitempty" tf:"mapping,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Raw []Pci5RawParameters `json:"raw,omitempty" tf:"raw,omitempty"`
+}
+
+type Pci5RawObservation struct {
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	RawID *string `json:"rawId,omitempty" tf:"raw_id,omitempty"`
+
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci5RawParameters struct {
+
+	// +kubebuilder:validation:Optional
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	// +kubebuilder:validation:Required
+	RawID *string `json:"rawId" tf:"raw_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci6MappingObservation struct {
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	MappingID *string `json:"mappingId,omitempty" tf:"mapping_id,omitempty"`
+
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci6MappingParameters struct {
+
+	// +kubebuilder:validation:Optional
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	// +kubebuilder:validation:Required
+	MappingID *string `json:"mappingId" tf:"mapping_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci6Observation struct {
+	Mapping []Pci6MappingObservation `json:"mapping,omitempty" tf:"mapping,omitempty"`
+
+	Raw []Pci6RawObservation `json:"raw,omitempty" tf:"raw,omitempty"`
+}
+
+type Pci6Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Mapping []Pci6MappingParameters `json:"mapping,omitempty" tf:"mapping,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Raw []Pci6RawParameters `json:"raw,omitempty" tf:"raw,omitempty"`
+}
+
+type Pci6RawObservation struct {
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	RawID *string `json:"rawId,omitempty" tf:"raw_id,omitempty"`
+
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci6RawParameters struct {
+
+	// +kubebuilder:validation:Optional
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	// +kubebuilder:validation:Required
+	RawID *string `json:"rawId" tf:"raw_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci7MappingObservation struct {
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	MappingID *string `json:"mappingId,omitempty" tf:"mapping_id,omitempty"`
+
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci7MappingParameters struct {
+
+	// +kubebuilder:validation:Optional
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	// +kubebuilder:validation:Required
+	MappingID *string `json:"mappingId" tf:"mapping_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci7Observation struct {
+	Mapping []Pci7MappingObservation `json:"mapping,omitempty" tf:"mapping,omitempty"`
+
+	Raw []Pci7RawObservation `json:"raw,omitempty" tf:"raw,omitempty"`
+}
+
+type Pci7Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Mapping []Pci7MappingParameters `json:"mapping,omitempty" tf:"mapping,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Raw []Pci7RawParameters `json:"raw,omitempty" tf:"raw,omitempty"`
+}
+
+type Pci7RawObservation struct {
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	RawID *string `json:"rawId,omitempty" tf:"raw_id,omitempty"`
+
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci7RawParameters struct {
+
+	// +kubebuilder:validation:Optional
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	// +kubebuilder:validation:Required
+	RawID *string `json:"rawId" tf:"raw_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci8MappingObservation struct {
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	MappingID *string `json:"mappingId,omitempty" tf:"mapping_id,omitempty"`
+
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci8MappingParameters struct {
+
+	// +kubebuilder:validation:Optional
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	// +kubebuilder:validation:Required
+	MappingID *string `json:"mappingId" tf:"mapping_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci8Observation struct {
+	Mapping []Pci8MappingObservation `json:"mapping,omitempty" tf:"mapping,omitempty"`
+
+	Raw []Pci8RawObservation `json:"raw,omitempty" tf:"raw,omitempty"`
+}
+
+type Pci8Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Mapping []Pci8MappingParameters `json:"mapping,omitempty" tf:"mapping,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Raw []Pci8RawParameters `json:"raw,omitempty" tf:"raw,omitempty"`
+}
+
+type Pci8RawObservation struct {
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	RawID *string `json:"rawId,omitempty" tf:"raw_id,omitempty"`
+
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci8RawParameters struct {
+
+	// +kubebuilder:validation:Optional
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	// +kubebuilder:validation:Required
+	RawID *string `json:"rawId" tf:"raw_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci9MappingObservation struct {
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	MappingID *string `json:"mappingId,omitempty" tf:"mapping_id,omitempty"`
+
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci9MappingParameters struct {
+
+	// +kubebuilder:validation:Optional
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	// +kubebuilder:validation:Required
+	MappingID *string `json:"mappingId" tf:"mapping_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci9Observation struct {
+	Mapping []Pci9MappingObservation `json:"mapping,omitempty" tf:"mapping,omitempty"`
+
+	Raw []Pci9RawObservation `json:"raw,omitempty" tf:"raw,omitempty"`
+}
+
+type Pci9Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Mapping []Pci9MappingParameters `json:"mapping,omitempty" tf:"mapping,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Raw []Pci9RawParameters `json:"raw,omitempty" tf:"raw,omitempty"`
+}
+
+type Pci9RawObservation struct {
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	RawID *string `json:"rawId,omitempty" tf:"raw_id,omitempty"`
+
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Pci9RawParameters struct {
+
+	// +kubebuilder:validation:Optional
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	// +kubebuilder:validation:Required
+	RawID *string `json:"rawId" tf:"raw_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type PciObservation struct {
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	MappingID *string `json:"mappingId,omitempty" tf:"mapping_id,omitempty"`
+
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	RawID *string `json:"rawId,omitempty" tf:"raw_id,omitempty"`
+
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type PciParameters struct {
+
+	// +kubebuilder:validation:Optional
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	// +kubebuilder:validation:Required
+	ID *float64 `json:"id" tf:"id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MappingID *string `json:"mappingId,omitempty" tf:"mapping_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	RawID *string `json:"rawId,omitempty" tf:"raw_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type PcisObservation struct {
+	Pci0 []Pci0Observation `json:"pci0,omitempty" tf:"pci0,omitempty"`
+
+	Pci1 []Pci1Observation `json:"pci1,omitempty" tf:"pci1,omitempty"`
+
+	Pci10 []Pci10Observation `json:"pci10,omitempty" tf:"pci10,omitempty"`
+
+	Pci11 []Pci11Observation `json:"pci11,omitempty" tf:"pci11,omitempty"`
+
+	Pci12 []Pci12Observation `json:"pci12,omitempty" tf:"pci12,omitempty"`
+
+	Pci13 []Pci13Observation `json:"pci13,omitempty" tf:"pci13,omitempty"`
+
+	Pci14 []Pci14Observation `json:"pci14,omitempty" tf:"pci14,omitempty"`
+
+	Pci2 []Pci2Observation `json:"pci2,omitempty" tf:"pci2,omitempty"`
+
+	Pci3 []Pci3Observation `json:"pci3,omitempty" tf:"pci3,omitempty"`
+
+	Pci4 []Pci4Observation `json:"pci4,omitempty" tf:"pci4,omitempty"`
+
+	Pci5 []Pci5Observation `json:"pci5,omitempty" tf:"pci5,omitempty"`
+
+	Pci6 []Pci6Observation `json:"pci6,omitempty" tf:"pci6,omitempty"`
+
+	Pci7 []Pci7Observation `json:"pci7,omitempty" tf:"pci7,omitempty"`
+
+	Pci8 []Pci8Observation `json:"pci8,omitempty" tf:"pci8,omitempty"`
+
+	Pci9 []Pci9Observation `json:"pci9,omitempty" tf:"pci9,omitempty"`
+}
+
+type PcisParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Pci0 []Pci0Parameters `json:"pci0,omitempty" tf:"pci0,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Pci1 []Pci1Parameters `json:"pci1,omitempty" tf:"pci1,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Pci10 []Pci10Parameters `json:"pci10,omitempty" tf:"pci10,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Pci11 []Pci11Parameters `json:"pci11,omitempty" tf:"pci11,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Pci12 []Pci12Parameters `json:"pci12,omitempty" tf:"pci12,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Pci13 []Pci13Parameters `json:"pci13,omitempty" tf:"pci13,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Pci14 []Pci14Parameters `json:"pci14,omitempty" tf:"pci14,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Pci2 []Pci2Parameters `json:"pci2,omitempty" tf:"pci2,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Pci3 []Pci3Parameters `json:"pci3,omitempty" tf:"pci3,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Pci4 []Pci4Parameters `json:"pci4,omitempty" tf:"pci4,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Pci5 []Pci5Parameters `json:"pci5,omitempty" tf:"pci5,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Pci6 []Pci6Parameters `json:"pci6,omitempty" tf:"pci6,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Pci7 []Pci7Parameters `json:"pci7,omitempty" tf:"pci7,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Pci8 []Pci8Parameters `json:"pci8,omitempty" tf:"pci8,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Pci9 []Pci9Parameters `json:"pci9,omitempty" tf:"pci9,omitempty"`
+}
+
+type PortObservation struct {
+	PortID *string `json:"portId,omitempty" tf:"port_id,omitempty"`
+
+	Usb3 *bool `json:"usb3,omitempty" tf:"usb3,omitempty"`
+}
+
+type PortParameters struct {
+
+	// +kubebuilder:validation:Required
+	PortID *string `json:"portId" tf:"port_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Usb3 *bool `json:"usb3,omitempty" tf:"usb3,omitempty"`
+}
+
 type QemuObservation struct {
 
-	// (do not use, api should manage timeouts)
 	// value in second to wait after some operations, useful if system is not fast or during i/o intensive parallel Upbound official provider tasks
 	AdditionalWait *float64 `json:"additionalWait,omitempty" tf:"additional_wait,omitempty"`
 
 	Agent *float64 `json:"agent,omitempty" tf:"agent,omitempty"`
 
+	// Timeout in seconds to keep trying to obtain an IP address from the guest agent one we have a connection.
+	AgentTimeout *float64 `json:"agentTimeout,omitempty" tf:"agent_timeout,omitempty"`
+
 	Args *string `json:"args,omitempty" tf:"args,omitempty"`
 
-	// : a valid boot order must be specified with Network type included (eg order=net0;scsi0)
 	// Automatically reboot the VM if any of the modified parameters requires a reboot to take effect.
 	AutomaticReboot *bool `json:"automaticReboot,omitempty" tf:"automatic_reboot,omitempty"`
 
@@ -256,34 +3415,42 @@ type QemuObservation struct {
 	// The VM bios, it can be seabios or ovmf
 	Bios *string `json:"bios,omitempty" tf:"bios,omitempty"`
 
-	// : a valid boot order must be specified with Network type included (eg order=net0;scsi0)
 	// Boot order of the VM
 	Boot *string `json:"boot,omitempty" tf:"boot,omitempty"`
 
 	Bootdisk *string `json:"bootdisk,omitempty" tf:"bootdisk,omitempty"`
 
-	Bridge *string `json:"bridge,omitempty" tf:"bridge,omitempty"`
+	CPU []CPUObservation `json:"cpu,omitempty" tf:"cpu,omitempty"`
 
-	CPU *string `json:"cpu,omitempty" tf:"cpu,omitempty"`
+	// CPU type
+	CPUType *string `json:"cpuType,omitempty" tf:"cpu_type,omitempty"`
 
 	CiWait *float64 `json:"ciWait,omitempty" tf:"ci_wait,omitempty"`
 
 	Cicustom *string `json:"cicustom,omitempty" tf:"cicustom,omitempty"`
 
+	Ciupgrade *bool `json:"ciupgrade,omitempty" tf:"ciupgrade,omitempty"`
+
 	Ciuser *string `json:"ciuser,omitempty" tf:"ciuser,omitempty"`
 
 	Clone *string `json:"clone,omitempty" tf:"clone,omitempty"`
 
-	// (do not use, api should manage timeouts)
+	CloneID *float64 `json:"cloneId,omitempty" tf:"clone_id,omitempty"`
+
 	// value in second to wait after a vm has been cloned, useful if system is not fast or during i/o intensive parallel Upbound official provider tasks
 	CloneWait *float64 `json:"cloneWait,omitempty" tf:"clone_wait,omitempty"`
 
-	CloudinitCdromStorage *string `json:"cloudinitCdromStorage,omitempty" tf:"cloudinit_cdrom_storage,omitempty"`
-
+	// Number of CPU cores
 	Cores *float64 `json:"cores,omitempty" tf:"cores,omitempty"`
+
+	// The node the qemu guest is currently on.
+	CurrentNode *string `json:"currentNode,omitempty" tf:"current_node,omitempty"`
 
 	// Use to track vm ipv4 address
 	DefaultIPv4Address *string `json:"defaultIpv4Address,omitempty" tf:"default_ipv4_address,omitempty"`
+
+	// Use to track vm ipv6 address
+	DefaultIPv6Address *string `json:"defaultIpv6Address,omitempty" tf:"default_ipv6_address,omitempty"`
 
 	// By default define SSH for provisioner info
 	DefineConnectionInfo *bool `json:"defineConnectionInfo,omitempty" tf:"define_connection_info,omitempty"`
@@ -293,15 +3460,15 @@ type QemuObservation struct {
 
 	Disk []DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
 
-	DiskGb *float64 `json:"diskGb,omitempty" tf:"disk_gb,omitempty"`
+	Disks []DisksObservation `json:"disks,omitempty" tf:"disks,omitempty"`
+
+	Efidisk []EfidiskObservation `json:"efidisk,omitempty" tf:"efidisk,omitempty"`
 
 	ForceCreate *bool `json:"forceCreate,omitempty" tf:"force_create,omitempty"`
 
 	ForceRecreateOnChangeOf *string `json:"forceRecreateOnChangeOf,omitempty" tf:"force_recreate_on_change_of,omitempty"`
 
 	FullClone *bool `json:"fullClone,omitempty" tf:"full_clone,omitempty"`
-
-	GuestAgentReadyTimeout *float64 `json:"guestAgentReadyTimeout,omitempty" tf:"guest_agent_ready_timeout,omitempty"`
 
 	Hagroup *string `json:"hagroup,omitempty" tf:"hagroup,omitempty"`
 
@@ -345,11 +3512,9 @@ type QemuObservation struct {
 
 	Ipconfig9 *string `json:"ipconfig9,omitempty" tf:"ipconfig9,omitempty"`
 
-	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
-
 	Kvm *bool `json:"kvm,omitempty" tf:"kvm,omitempty"`
 
-	Mac *string `json:"mac,omitempty" tf:"mac,omitempty"`
+	LinkedVmid *float64 `json:"linkedVmid,omitempty" tf:"linked_vmid,omitempty"`
 
 	// Specifies the Qemu machine type.
 	Machine *string `json:"machine,omitempty" tf:"machine,omitempty"`
@@ -363,25 +3528,24 @@ type QemuObservation struct {
 
 	Network []NetworkObservation `json:"network,omitempty" tf:"network,omitempty"`
 
-	Nic *string `json:"nic,omitempty" tf:"nic,omitempty"`
-
+	// Enable NUMA
 	Numa *bool `json:"numa,omitempty" tf:"numa,omitempty"`
 
-	// : a valid boot order must be specified with Network type included (eg order=net0;scsi0)
 	// VM autostart on boot
 	Onboot *bool `json:"onboot,omitempty" tf:"onboot,omitempty"`
-
-	// VM autostart on create
-	Oncreate *bool `json:"oncreate,omitempty" tf:"oncreate,omitempty"`
 
 	OsNetworkConfig *string `json:"osNetworkConfig,omitempty" tf:"os_network_config,omitempty"`
 
 	OsType *string `json:"osType,omitempty" tf:"os_type,omitempty"`
 
+	Pci []PciObservation `json:"pci,omitempty" tf:"pci,omitempty"`
+
+	Pcis []PcisObservation `json:"pcis,omitempty" tf:"pcis,omitempty"`
+
 	Pool *string `json:"pool,omitempty" tf:"pool,omitempty"`
 
-	// (do not use, provider do not fully support preprovisioning anymore)
-	Preprovision *bool `json:"preprovision,omitempty" tf:"preprovision,omitempty"`
+	// Protect VM from being removed
+	Protection *bool `json:"protection,omitempty" tf:"protection,omitempty"`
 
 	Pxe *bool `json:"pxe,omitempty" tf:"pxe,omitempty"`
 
@@ -393,6 +3557,7 @@ type QemuObservation struct {
 	// Use to pass instance ip address, redundant
 	SSHForwardIP *string `json:"sshForwardIp,omitempty" tf:"ssh_forward_ip,omitempty"`
 
+	// The ip address used for the ssh connection, this will prefer ipv4 over ipv6 if both are available
 	SSHHost *string `json:"sshHost,omitempty" tf:"ssh_host,omitempty"`
 
 	SSHPort *string `json:"sshPort,omitempty" tf:"ssh_port,omitempty"`
@@ -405,6 +3570,13 @@ type QemuObservation struct {
 
 	Serial []SerialObservation `json:"serial,omitempty" tf:"serial,omitempty"`
 
+	SkipIPv4 *bool `json:"skipIpv4,omitempty" tf:"skip_ipv4,omitempty"`
+
+	SkipIPv6 *bool `json:"skipIpv6,omitempty" tf:"skip_ipv6,omitempty"`
+
+	Smbios []SmbiosObservation `json:"smbios,omitempty" tf:"smbios,omitempty"`
+
+	// Number of CPU sockets
 	Sockets *float64 `json:"sockets,omitempty" tf:"sockets,omitempty"`
 
 	Sshkeys *string `json:"sshkeys,omitempty" tf:"sshkeys,omitempty"`
@@ -412,28 +3584,33 @@ type QemuObservation struct {
 	// Startup order of the VM
 	Startup *string `json:"startup,omitempty" tf:"startup,omitempty"`
 
-	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
-
-	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
-
 	// Enable tablet mode in the VM
 	Tablet *bool `json:"tablet,omitempty" tf:"tablet,omitempty"`
 
 	Tags *string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The node where VM goes to
+	// The node the qemu guest goes to.
 	TargetNode *string `json:"targetNode,omitempty" tf:"target_node,omitempty"`
+
+	// A list of nodes the qemu guest may be placed on.
+	TargetNodes []*string `json:"targetNodes,omitempty" tf:"target_nodes,omitempty"`
+
+	TpmState []TpmStateObservation `json:"tpmState,omitempty" tf:"tpm_state,omitempty"`
 
 	// Record unused disks in proxmox. This is intended to be read-only for now.
 	UnusedDisk []UnusedDiskObservation `json:"unusedDisk,omitempty" tf:"unused_disk,omitempty"`
 
 	Usb []UsbObservation `json:"usb,omitempty" tf:"usb,omitempty"`
 
+	Usbs []UsbsObservation `json:"usbs,omitempty" tf:"usbs,omitempty"`
+
+	// The state of the VM (running, started, stopped)
+	VMState *string `json:"vmState,omitempty" tf:"vm_state,omitempty"`
+
+	// Number of virtual cores
 	Vcpus *float64 `json:"vcpus,omitempty" tf:"vcpus,omitempty"`
 
 	Vga []VgaObservation `json:"vga,omitempty" tf:"vga,omitempty"`
-
-	Vlan *float64 `json:"vlan,omitempty" tf:"vlan,omitempty"`
 
 	// The VM identifier in proxmox (100-999999999)
 	Vmid *float64 `json:"vmid,omitempty" tf:"vmid,omitempty"`
@@ -441,7 +3618,6 @@ type QemuObservation struct {
 
 type QemuParameters struct {
 
-	// (do not use, api should manage timeouts)
 	// value in second to wait after some operations, useful if system is not fast or during i/o intensive parallel Upbound official provider tasks
 	// +kubebuilder:validation:Optional
 	AdditionalWait *float64 `json:"additionalWait,omitempty" tf:"additional_wait,omitempty"`
@@ -449,10 +3625,13 @@ type QemuParameters struct {
 	// +kubebuilder:validation:Optional
 	Agent *float64 `json:"agent,omitempty" tf:"agent,omitempty"`
 
+	// Timeout in seconds to keep trying to obtain an IP address from the guest agent one we have a connection.
+	// +kubebuilder:validation:Optional
+	AgentTimeout *float64 `json:"agentTimeout,omitempty" tf:"agent_timeout,omitempty"`
+
 	// +kubebuilder:validation:Optional
 	Args *string `json:"args,omitempty" tf:"args,omitempty"`
 
-	// : a valid boot order must be specified with Network type included (eg order=net0;scsi0)
 	// Automatically reboot the VM if any of the modified parameters requires a reboot to take effect.
 	// +kubebuilder:validation:Optional
 	AutomaticReboot *bool `json:"automaticReboot,omitempty" tf:"automatic_reboot,omitempty"`
@@ -464,7 +3643,6 @@ type QemuParameters struct {
 	// +kubebuilder:validation:Optional
 	Bios *string `json:"bios,omitempty" tf:"bios,omitempty"`
 
-	// : a valid boot order must be specified with Network type included (eg order=net0;scsi0)
 	// Boot order of the VM
 	// +kubebuilder:validation:Optional
 	Boot *string `json:"boot,omitempty" tf:"boot,omitempty"`
@@ -473,10 +3651,11 @@ type QemuParameters struct {
 	Bootdisk *string `json:"bootdisk,omitempty" tf:"bootdisk,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Bridge *string `json:"bridge,omitempty" tf:"bridge,omitempty"`
+	CPU []CPUParameters `json:"cpu,omitempty" tf:"cpu,omitempty"`
 
+	// CPU type
 	// +kubebuilder:validation:Optional
-	CPU *string `json:"cpu,omitempty" tf:"cpu,omitempty"`
+	CPUType *string `json:"cpuType,omitempty" tf:"cpu_type,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	CiWait *float64 `json:"ciWait,omitempty" tf:"ci_wait,omitempty"`
@@ -488,19 +3667,22 @@ type QemuParameters struct {
 	CipasswordSecretRef *v1.SecretKeySelector `json:"cipasswordSecretRef,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
+	Ciupgrade *bool `json:"ciupgrade,omitempty" tf:"ciupgrade,omitempty"`
+
+	// +kubebuilder:validation:Optional
 	Ciuser *string `json:"ciuser,omitempty" tf:"ciuser,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Clone *string `json:"clone,omitempty" tf:"clone,omitempty"`
 
-	// (do not use, api should manage timeouts)
+	// +kubebuilder:validation:Optional
+	CloneID *float64 `json:"cloneId,omitempty" tf:"clone_id,omitempty"`
+
 	// value in second to wait after a vm has been cloned, useful if system is not fast or during i/o intensive parallel Upbound official provider tasks
 	// +kubebuilder:validation:Optional
 	CloneWait *float64 `json:"cloneWait,omitempty" tf:"clone_wait,omitempty"`
 
-	// +kubebuilder:validation:Optional
-	CloudinitCdromStorage *string `json:"cloudinitCdromStorage,omitempty" tf:"cloudinit_cdrom_storage,omitempty"`
-
+	// Number of CPU cores
 	// +kubebuilder:validation:Optional
 	Cores *float64 `json:"cores,omitempty" tf:"cores,omitempty"`
 
@@ -516,7 +3698,10 @@ type QemuParameters struct {
 	Disk []DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	DiskGb *float64 `json:"diskGb,omitempty" tf:"disk_gb,omitempty"`
+	Disks []DisksParameters `json:"disks,omitempty" tf:"disks,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Efidisk []EfidiskParameters `json:"efidisk,omitempty" tf:"efidisk,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	ForceCreate *bool `json:"forceCreate,omitempty" tf:"force_create,omitempty"`
@@ -526,9 +3711,6 @@ type QemuParameters struct {
 
 	// +kubebuilder:validation:Optional
 	FullClone *bool `json:"fullClone,omitempty" tf:"full_clone,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	GuestAgentReadyTimeout *float64 `json:"guestAgentReadyTimeout,omitempty" tf:"guest_agent_ready_timeout,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Hagroup *string `json:"hagroup,omitempty" tf:"hagroup,omitempty"`
@@ -591,13 +3773,7 @@ type QemuParameters struct {
 	Ipconfig9 *string `json:"ipconfig9,omitempty" tf:"ipconfig9,omitempty"`
 
 	// +kubebuilder:validation:Optional
-	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
-
-	// +kubebuilder:validation:Optional
 	Kvm *bool `json:"kvm,omitempty" tf:"kvm,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	Mac *string `json:"mac,omitempty" tf:"mac,omitempty"`
 
 	// Specifies the Qemu machine type.
 	// +kubebuilder:validation:Optional
@@ -616,20 +3792,13 @@ type QemuParameters struct {
 	// +kubebuilder:validation:Optional
 	Network []NetworkParameters `json:"network,omitempty" tf:"network,omitempty"`
 
-	// +kubebuilder:validation:Optional
-	Nic *string `json:"nic,omitempty" tf:"nic,omitempty"`
-
+	// Enable NUMA
 	// +kubebuilder:validation:Optional
 	Numa *bool `json:"numa,omitempty" tf:"numa,omitempty"`
 
-	// : a valid boot order must be specified with Network type included (eg order=net0;scsi0)
 	// VM autostart on boot
 	// +kubebuilder:validation:Optional
 	Onboot *bool `json:"onboot,omitempty" tf:"onboot,omitempty"`
-
-	// VM autostart on create
-	// +kubebuilder:validation:Optional
-	Oncreate *bool `json:"oncreate,omitempty" tf:"oncreate,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	OsNetworkConfig *string `json:"osNetworkConfig,omitempty" tf:"os_network_config,omitempty"`
@@ -638,11 +3807,17 @@ type QemuParameters struct {
 	OsType *string `json:"osType,omitempty" tf:"os_type,omitempty"`
 
 	// +kubebuilder:validation:Optional
+	Pci []PciParameters `json:"pci,omitempty" tf:"pci,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Pcis []PcisParameters `json:"pcis,omitempty" tf:"pcis,omitempty"`
+
+	// +kubebuilder:validation:Optional
 	Pool *string `json:"pool,omitempty" tf:"pool,omitempty"`
 
-	// (do not use, provider do not fully support preprovisioning anymore)
+	// Protect VM from being removed
 	// +kubebuilder:validation:Optional
-	Preprovision *bool `json:"preprovision,omitempty" tf:"preprovision,omitempty"`
+	Protection *bool `json:"protection,omitempty" tf:"protection,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Pxe *bool `json:"pxe,omitempty" tf:"pxe,omitempty"`
@@ -670,6 +3845,16 @@ type QemuParameters struct {
 	Serial []SerialParameters `json:"serial,omitempty" tf:"serial,omitempty"`
 
 	// +kubebuilder:validation:Optional
+	SkipIPv4 *bool `json:"skipIpv4,omitempty" tf:"skip_ipv4,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SkipIPv6 *bool `json:"skipIpv6,omitempty" tf:"skip_ipv6,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Smbios []SmbiosParameters `json:"smbios,omitempty" tf:"smbios,omitempty"`
+
+	// Number of CPU sockets
+	// +kubebuilder:validation:Optional
 	Sockets *float64 `json:"sockets,omitempty" tf:"sockets,omitempty"`
 
 	// +kubebuilder:validation:Optional
@@ -679,12 +3864,6 @@ type QemuParameters struct {
 	// +kubebuilder:validation:Optional
 	Startup *string `json:"startup,omitempty" tf:"startup,omitempty"`
 
-	// +kubebuilder:validation:Optional
-	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
-
 	// Enable tablet mode in the VM
 	// +kubebuilder:validation:Optional
 	Tablet *bool `json:"tablet,omitempty" tf:"tablet,omitempty"`
@@ -692,25 +3871,10929 @@ type QemuParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags *string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The node where VM goes to
+	// The node the qemu guest goes to.
 	// +kubebuilder:validation:Optional
 	TargetNode *string `json:"targetNode,omitempty" tf:"target_node,omitempty"`
+
+	// A list of nodes the qemu guest may be placed on.
+	// +kubebuilder:validation:Optional
+	TargetNodes []*string `json:"targetNodes,omitempty" tf:"target_nodes,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	TpmState []TpmStateParameters `json:"tpmState,omitempty" tf:"tpm_state,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Usb []UsbParameters `json:"usb,omitempty" tf:"usb,omitempty"`
 
+	// +kubebuilder:validation:Optional
+	Usbs []UsbsParameters `json:"usbs,omitempty" tf:"usbs,omitempty"`
+
+	// The state of the VM (running, started, stopped)
+	// +kubebuilder:validation:Optional
+	VMState *string `json:"vmState,omitempty" tf:"vm_state,omitempty"`
+
+	// Number of virtual cores
 	// +kubebuilder:validation:Optional
 	Vcpus *float64 `json:"vcpus,omitempty" tf:"vcpus,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Vga []VgaParameters `json:"vga,omitempty" tf:"vga,omitempty"`
 
-	// +kubebuilder:validation:Optional
-	Vlan *float64 `json:"vlan,omitempty" tf:"vlan,omitempty"`
-
 	// The VM identifier in proxmox (100-999999999)
 	// +kubebuilder:validation:Optional
 	Vmid *float64 `json:"vmid,omitempty" tf:"vmid,omitempty"`
+}
+
+type RawObservation struct {
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	RawID *string `json:"rawId,omitempty" tf:"raw_id,omitempty"`
+
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type RawParameters struct {
+
+	// +kubebuilder:validation:Optional
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Mdev *string `json:"mdev,omitempty" tf:"mdev,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Pcie *bool `json:"pcie,omitempty" tf:"pcie,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	PrimaryGpu *bool `json:"primaryGpu,omitempty" tf:"primary_gpu,omitempty"`
+
+	// +kubebuilder:validation:Required
+	RawID *string `json:"rawId" tf:"raw_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Rombar *bool `json:"rombar,omitempty" tf:"rombar,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubDeviceID *string `json:"subDeviceId,omitempty" tf:"sub_device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SubVendorID *string `json:"subVendorId,omitempty" tf:"sub_vendor_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	VendorID *string `json:"vendorId,omitempty" tf:"vendor_id,omitempty"`
+}
+
+type Sata0CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Sata0CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Sata0CloudinitObservation struct {
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+}
+
+type Sata0CloudinitParameters struct {
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+}
+
+type Sata0DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Sata0DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Sata0Observation struct {
+	Cdrom []Sata0CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Cloudinit []Sata0CloudinitObservation `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	Disk []Sata0DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Sata0PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Sata0Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Sata0CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cloudinit []Sata0CloudinitParameters `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Sata0DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Sata0PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Sata0PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Sata0PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Sata1CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Sata1CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Sata1CloudinitObservation struct {
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+}
+
+type Sata1CloudinitParameters struct {
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+}
+
+type Sata1DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Sata1DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Sata1Observation struct {
+	Cdrom []Sata1CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Cloudinit []Sata1CloudinitObservation `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	Disk []Sata1DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Sata1PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Sata1Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Sata1CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cloudinit []Sata1CloudinitParameters `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Sata1DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Sata1PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Sata1PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Sata1PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Sata2CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Sata2CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Sata2CloudinitObservation struct {
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+}
+
+type Sata2CloudinitParameters struct {
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+}
+
+type Sata2DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Sata2DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Sata2Observation struct {
+	Cdrom []Sata2CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Cloudinit []Sata2CloudinitObservation `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	Disk []Sata2DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Sata2PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Sata2Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Sata2CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cloudinit []Sata2CloudinitParameters `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Sata2DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Sata2PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Sata2PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Sata2PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Sata3CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Sata3CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Sata3CloudinitObservation struct {
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+}
+
+type Sata3CloudinitParameters struct {
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+}
+
+type Sata3DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Sata3DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Sata3Observation struct {
+	Cdrom []Sata3CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Cloudinit []Sata3CloudinitObservation `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	Disk []Sata3DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Sata3PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Sata3Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Sata3CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cloudinit []Sata3CloudinitParameters `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Sata3DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Sata3PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Sata3PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Sata3PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Sata4CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Sata4CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Sata4CloudinitObservation struct {
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+}
+
+type Sata4CloudinitParameters struct {
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+}
+
+type Sata4DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Sata4DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Sata4Observation struct {
+	Cdrom []Sata4CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Cloudinit []Sata4CloudinitObservation `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	Disk []Sata4DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Sata4PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Sata4Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Sata4CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cloudinit []Sata4CloudinitParameters `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Sata4DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Sata4PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Sata4PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Sata4PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Sata5CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Sata5CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Sata5CloudinitObservation struct {
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+}
+
+type Sata5CloudinitParameters struct {
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+}
+
+type Sata5DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Sata5DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Sata5Observation struct {
+	Cdrom []Sata5CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Cloudinit []Sata5CloudinitObservation `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	Disk []Sata5DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Sata5PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Sata5Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Sata5CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cloudinit []Sata5CloudinitParameters `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Sata5DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Sata5PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Sata5PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Sata5PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type SataObservation struct {
+	Sata0 []Sata0Observation `json:"sata0,omitempty" tf:"sata0,omitempty"`
+
+	Sata1 []Sata1Observation `json:"sata1,omitempty" tf:"sata1,omitempty"`
+
+	Sata2 []Sata2Observation `json:"sata2,omitempty" tf:"sata2,omitempty"`
+
+	Sata3 []Sata3Observation `json:"sata3,omitempty" tf:"sata3,omitempty"`
+
+	Sata4 []Sata4Observation `json:"sata4,omitempty" tf:"sata4,omitempty"`
+
+	Sata5 []Sata5Observation `json:"sata5,omitempty" tf:"sata5,omitempty"`
+}
+
+type SataParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Sata0 []Sata0Parameters `json:"sata0,omitempty" tf:"sata0,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Sata1 []Sata1Parameters `json:"sata1,omitempty" tf:"sata1,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Sata2 []Sata2Parameters `json:"sata2,omitempty" tf:"sata2,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Sata3 []Sata3Parameters `json:"sata3,omitempty" tf:"sata3,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Sata4 []Sata4Parameters `json:"sata4,omitempty" tf:"sata4,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Sata5 []Sata5Parameters `json:"sata5,omitempty" tf:"sata5,omitempty"`
+}
+
+type Scsi0CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi0CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi0CloudinitObservation struct {
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+}
+
+type Scsi0CloudinitParameters struct {
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+}
+
+type Scsi0DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi0DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi0Observation struct {
+	Cdrom []Scsi0CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Cloudinit []Scsi0CloudinitObservation `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	Disk []Scsi0DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Scsi0PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi0Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Scsi0CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cloudinit []Scsi0CloudinitParameters `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Scsi0DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Scsi0PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi0PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi0PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi10CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi10CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi10CloudinitObservation struct {
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+}
+
+type Scsi10CloudinitParameters struct {
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+}
+
+type Scsi10DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi10DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi10Observation struct {
+	Cdrom []Scsi10CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Cloudinit []Scsi10CloudinitObservation `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	Disk []Scsi10DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Scsi10PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi10Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Scsi10CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cloudinit []Scsi10CloudinitParameters `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Scsi10DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Scsi10PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi10PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi10PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi11CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi11CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi11CloudinitObservation struct {
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+}
+
+type Scsi11CloudinitParameters struct {
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+}
+
+type Scsi11DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi11DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi11Observation struct {
+	Cdrom []Scsi11CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Cloudinit []Scsi11CloudinitObservation `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	Disk []Scsi11DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Scsi11PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi11Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Scsi11CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cloudinit []Scsi11CloudinitParameters `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Scsi11DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Scsi11PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi11PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi11PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi12CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi12CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi12CloudinitObservation struct {
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+}
+
+type Scsi12CloudinitParameters struct {
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+}
+
+type Scsi12DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi12DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi12Observation struct {
+	Cdrom []Scsi12CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Cloudinit []Scsi12CloudinitObservation `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	Disk []Scsi12DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Scsi12PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi12Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Scsi12CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cloudinit []Scsi12CloudinitParameters `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Scsi12DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Scsi12PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi12PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi12PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi13CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi13CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi13CloudinitObservation struct {
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+}
+
+type Scsi13CloudinitParameters struct {
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+}
+
+type Scsi13DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi13DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi13Observation struct {
+	Cdrom []Scsi13CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Cloudinit []Scsi13CloudinitObservation `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	Disk []Scsi13DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Scsi13PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi13Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Scsi13CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cloudinit []Scsi13CloudinitParameters `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Scsi13DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Scsi13PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi13PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi13PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi14CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi14CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi14CloudinitObservation struct {
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+}
+
+type Scsi14CloudinitParameters struct {
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+}
+
+type Scsi14DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi14DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi14Observation struct {
+	Cdrom []Scsi14CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Cloudinit []Scsi14CloudinitObservation `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	Disk []Scsi14DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Scsi14PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi14Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Scsi14CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cloudinit []Scsi14CloudinitParameters `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Scsi14DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Scsi14PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi14PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi14PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi15CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi15CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi15CloudinitObservation struct {
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+}
+
+type Scsi15CloudinitParameters struct {
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+}
+
+type Scsi15DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi15DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi15Observation struct {
+	Cdrom []Scsi15CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Cloudinit []Scsi15CloudinitObservation `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	Disk []Scsi15DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Scsi15PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi15Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Scsi15CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cloudinit []Scsi15CloudinitParameters `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Scsi15DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Scsi15PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi15PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi15PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi16CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi16CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi16CloudinitObservation struct {
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+}
+
+type Scsi16CloudinitParameters struct {
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+}
+
+type Scsi16DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi16DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi16Observation struct {
+	Cdrom []Scsi16CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Cloudinit []Scsi16CloudinitObservation `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	Disk []Scsi16DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Scsi16PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi16Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Scsi16CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cloudinit []Scsi16CloudinitParameters `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Scsi16DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Scsi16PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi16PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi16PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi17CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi17CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi17CloudinitObservation struct {
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+}
+
+type Scsi17CloudinitParameters struct {
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+}
+
+type Scsi17DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi17DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi17Observation struct {
+	Cdrom []Scsi17CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Cloudinit []Scsi17CloudinitObservation `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	Disk []Scsi17DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Scsi17PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi17Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Scsi17CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cloudinit []Scsi17CloudinitParameters `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Scsi17DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Scsi17PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi17PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi17PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi18CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi18CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi18CloudinitObservation struct {
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+}
+
+type Scsi18CloudinitParameters struct {
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+}
+
+type Scsi18DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi18DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi18Observation struct {
+	Cdrom []Scsi18CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Cloudinit []Scsi18CloudinitObservation `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	Disk []Scsi18DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Scsi18PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi18Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Scsi18CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cloudinit []Scsi18CloudinitParameters `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Scsi18DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Scsi18PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi18PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi18PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi19CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi19CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi19CloudinitObservation struct {
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+}
+
+type Scsi19CloudinitParameters struct {
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+}
+
+type Scsi19DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi19DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi19Observation struct {
+	Cdrom []Scsi19CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Cloudinit []Scsi19CloudinitObservation `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	Disk []Scsi19DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Scsi19PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi19Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Scsi19CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cloudinit []Scsi19CloudinitParameters `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Scsi19DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Scsi19PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi19PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi19PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi1CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi1CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi1CloudinitObservation struct {
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+}
+
+type Scsi1CloudinitParameters struct {
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+}
+
+type Scsi1DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi1DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi1Observation struct {
+	Cdrom []Scsi1CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Cloudinit []Scsi1CloudinitObservation `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	Disk []Scsi1DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Scsi1PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi1Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Scsi1CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cloudinit []Scsi1CloudinitParameters `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Scsi1DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Scsi1PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi1PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi1PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi20CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi20CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi20CloudinitObservation struct {
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+}
+
+type Scsi20CloudinitParameters struct {
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+}
+
+type Scsi20DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi20DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi20Observation struct {
+	Cdrom []Scsi20CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Cloudinit []Scsi20CloudinitObservation `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	Disk []Scsi20DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Scsi20PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi20Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Scsi20CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cloudinit []Scsi20CloudinitParameters `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Scsi20DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Scsi20PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi20PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi20PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi21CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi21CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi21CloudinitObservation struct {
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+}
+
+type Scsi21CloudinitParameters struct {
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+}
+
+type Scsi21DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi21DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi21Observation struct {
+	Cdrom []Scsi21CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Cloudinit []Scsi21CloudinitObservation `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	Disk []Scsi21DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Scsi21PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi21Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Scsi21CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cloudinit []Scsi21CloudinitParameters `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Scsi21DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Scsi21PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi21PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi21PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi22CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi22CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi22CloudinitObservation struct {
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+}
+
+type Scsi22CloudinitParameters struct {
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+}
+
+type Scsi22DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi22DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi22Observation struct {
+	Cdrom []Scsi22CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Cloudinit []Scsi22CloudinitObservation `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	Disk []Scsi22DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Scsi22PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi22Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Scsi22CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cloudinit []Scsi22CloudinitParameters `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Scsi22DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Scsi22PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi22PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi22PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi23CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi23CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi23CloudinitObservation struct {
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+}
+
+type Scsi23CloudinitParameters struct {
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+}
+
+type Scsi23DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi23DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi23Observation struct {
+	Cdrom []Scsi23CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Cloudinit []Scsi23CloudinitObservation `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	Disk []Scsi23DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Scsi23PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi23Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Scsi23CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cloudinit []Scsi23CloudinitParameters `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Scsi23DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Scsi23PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi23PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi23PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi24CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi24CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi24CloudinitObservation struct {
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+}
+
+type Scsi24CloudinitParameters struct {
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+}
+
+type Scsi24DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi24DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi24Observation struct {
+	Cdrom []Scsi24CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Cloudinit []Scsi24CloudinitObservation `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	Disk []Scsi24DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Scsi24PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi24Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Scsi24CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cloudinit []Scsi24CloudinitParameters `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Scsi24DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Scsi24PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi24PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi24PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi25CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi25CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi25CloudinitObservation struct {
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+}
+
+type Scsi25CloudinitParameters struct {
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+}
+
+type Scsi25DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi25DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi25Observation struct {
+	Cdrom []Scsi25CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Cloudinit []Scsi25CloudinitObservation `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	Disk []Scsi25DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Scsi25PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi25Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Scsi25CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cloudinit []Scsi25CloudinitParameters `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Scsi25DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Scsi25PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi25PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi25PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi26CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi26CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi26CloudinitObservation struct {
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+}
+
+type Scsi26CloudinitParameters struct {
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+}
+
+type Scsi26DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi26DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi26Observation struct {
+	Cdrom []Scsi26CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Cloudinit []Scsi26CloudinitObservation `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	Disk []Scsi26DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Scsi26PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi26Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Scsi26CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cloudinit []Scsi26CloudinitParameters `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Scsi26DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Scsi26PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi26PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi26PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi27CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi27CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi27CloudinitObservation struct {
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+}
+
+type Scsi27CloudinitParameters struct {
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+}
+
+type Scsi27DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi27DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi27Observation struct {
+	Cdrom []Scsi27CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Cloudinit []Scsi27CloudinitObservation `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	Disk []Scsi27DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Scsi27PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi27Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Scsi27CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cloudinit []Scsi27CloudinitParameters `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Scsi27DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Scsi27PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi27PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi27PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi28CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi28CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi28CloudinitObservation struct {
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+}
+
+type Scsi28CloudinitParameters struct {
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+}
+
+type Scsi28DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi28DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi28Observation struct {
+	Cdrom []Scsi28CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Cloudinit []Scsi28CloudinitObservation `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	Disk []Scsi28DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Scsi28PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi28Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Scsi28CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cloudinit []Scsi28CloudinitParameters `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Scsi28DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Scsi28PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi28PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi28PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi29CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi29CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi29CloudinitObservation struct {
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+}
+
+type Scsi29CloudinitParameters struct {
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+}
+
+type Scsi29DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi29DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi29Observation struct {
+	Cdrom []Scsi29CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Cloudinit []Scsi29CloudinitObservation `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	Disk []Scsi29DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Scsi29PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi29Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Scsi29CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cloudinit []Scsi29CloudinitParameters `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Scsi29DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Scsi29PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi29PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi29PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi2CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi2CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi2CloudinitObservation struct {
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+}
+
+type Scsi2CloudinitParameters struct {
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+}
+
+type Scsi2DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi2DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi2Observation struct {
+	Cdrom []Scsi2CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Cloudinit []Scsi2CloudinitObservation `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	Disk []Scsi2DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Scsi2PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi2Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Scsi2CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cloudinit []Scsi2CloudinitParameters `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Scsi2DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Scsi2PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi2PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi2PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi30CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi30CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi30CloudinitObservation struct {
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+}
+
+type Scsi30CloudinitParameters struct {
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+}
+
+type Scsi30DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi30DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi30Observation struct {
+	Cdrom []Scsi30CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Cloudinit []Scsi30CloudinitObservation `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	Disk []Scsi30DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Scsi30PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi30Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Scsi30CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cloudinit []Scsi30CloudinitParameters `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Scsi30DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Scsi30PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi30PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi30PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi3CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi3CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi3CloudinitObservation struct {
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+}
+
+type Scsi3CloudinitParameters struct {
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+}
+
+type Scsi3DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi3DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi3Observation struct {
+	Cdrom []Scsi3CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Cloudinit []Scsi3CloudinitObservation `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	Disk []Scsi3DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Scsi3PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi3Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Scsi3CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cloudinit []Scsi3CloudinitParameters `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Scsi3DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Scsi3PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi3PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi3PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi4CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi4CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi4CloudinitObservation struct {
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+}
+
+type Scsi4CloudinitParameters struct {
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+}
+
+type Scsi4DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi4DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi4Observation struct {
+	Cdrom []Scsi4CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Cloudinit []Scsi4CloudinitObservation `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	Disk []Scsi4DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Scsi4PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi4Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Scsi4CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cloudinit []Scsi4CloudinitParameters `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Scsi4DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Scsi4PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi4PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi4PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi5CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi5CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi5CloudinitObservation struct {
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+}
+
+type Scsi5CloudinitParameters struct {
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+}
+
+type Scsi5DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi5DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi5Observation struct {
+	Cdrom []Scsi5CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Cloudinit []Scsi5CloudinitObservation `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	Disk []Scsi5DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Scsi5PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi5Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Scsi5CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cloudinit []Scsi5CloudinitParameters `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Scsi5DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Scsi5PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi5PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi5PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi6CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi6CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi6CloudinitObservation struct {
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+}
+
+type Scsi6CloudinitParameters struct {
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+}
+
+type Scsi6DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi6DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi6Observation struct {
+	Cdrom []Scsi6CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Cloudinit []Scsi6CloudinitObservation `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	Disk []Scsi6DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Scsi6PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi6Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Scsi6CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cloudinit []Scsi6CloudinitParameters `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Scsi6DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Scsi6PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi6PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi6PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi7CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi7CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi7CloudinitObservation struct {
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+}
+
+type Scsi7CloudinitParameters struct {
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+}
+
+type Scsi7DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi7DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi7Observation struct {
+	Cdrom []Scsi7CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Cloudinit []Scsi7CloudinitObservation `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	Disk []Scsi7DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Scsi7PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi7Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Scsi7CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cloudinit []Scsi7CloudinitParameters `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Scsi7DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Scsi7PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi7PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi7PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi8CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi8CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi8CloudinitObservation struct {
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+}
+
+type Scsi8CloudinitParameters struct {
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+}
+
+type Scsi8DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi8DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi8Observation struct {
+	Cdrom []Scsi8CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Cloudinit []Scsi8CloudinitObservation `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	Disk []Scsi8DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Scsi8PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi8Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Scsi8CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cloudinit []Scsi8CloudinitParameters `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Scsi8DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Scsi8PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi8PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi8PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi9CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi9CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi9CloudinitObservation struct {
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+}
+
+type Scsi9CloudinitParameters struct {
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+}
+
+type Scsi9DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi9DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi9Observation struct {
+	Cdrom []Scsi9CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Cloudinit []Scsi9CloudinitObservation `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	Disk []Scsi9DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Scsi9PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi9Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Scsi9CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cloudinit []Scsi9CloudinitParameters `json:"cloudinit,omitempty" tf:"cloudinit,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Scsi9DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Scsi9PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Scsi9PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Scsi9PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Emulatessd *bool `json:"emulatessd,omitempty" tf:"emulatessd,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type ScsiObservation struct {
+	Scsi0 []Scsi0Observation `json:"scsi0,omitempty" tf:"scsi0,omitempty"`
+
+	Scsi1 []Scsi1Observation `json:"scsi1,omitempty" tf:"scsi1,omitempty"`
+
+	Scsi10 []Scsi10Observation `json:"scsi10,omitempty" tf:"scsi10,omitempty"`
+
+	Scsi11 []Scsi11Observation `json:"scsi11,omitempty" tf:"scsi11,omitempty"`
+
+	Scsi12 []Scsi12Observation `json:"scsi12,omitempty" tf:"scsi12,omitempty"`
+
+	Scsi13 []Scsi13Observation `json:"scsi13,omitempty" tf:"scsi13,omitempty"`
+
+	Scsi14 []Scsi14Observation `json:"scsi14,omitempty" tf:"scsi14,omitempty"`
+
+	Scsi15 []Scsi15Observation `json:"scsi15,omitempty" tf:"scsi15,omitempty"`
+
+	Scsi16 []Scsi16Observation `json:"scsi16,omitempty" tf:"scsi16,omitempty"`
+
+	Scsi17 []Scsi17Observation `json:"scsi17,omitempty" tf:"scsi17,omitempty"`
+
+	Scsi18 []Scsi18Observation `json:"scsi18,omitempty" tf:"scsi18,omitempty"`
+
+	Scsi19 []Scsi19Observation `json:"scsi19,omitempty" tf:"scsi19,omitempty"`
+
+	Scsi2 []Scsi2Observation `json:"scsi2,omitempty" tf:"scsi2,omitempty"`
+
+	Scsi20 []Scsi20Observation `json:"scsi20,omitempty" tf:"scsi20,omitempty"`
+
+	Scsi21 []Scsi21Observation `json:"scsi21,omitempty" tf:"scsi21,omitempty"`
+
+	Scsi22 []Scsi22Observation `json:"scsi22,omitempty" tf:"scsi22,omitempty"`
+
+	Scsi23 []Scsi23Observation `json:"scsi23,omitempty" tf:"scsi23,omitempty"`
+
+	Scsi24 []Scsi24Observation `json:"scsi24,omitempty" tf:"scsi24,omitempty"`
+
+	Scsi25 []Scsi25Observation `json:"scsi25,omitempty" tf:"scsi25,omitempty"`
+
+	Scsi26 []Scsi26Observation `json:"scsi26,omitempty" tf:"scsi26,omitempty"`
+
+	Scsi27 []Scsi27Observation `json:"scsi27,omitempty" tf:"scsi27,omitempty"`
+
+	Scsi28 []Scsi28Observation `json:"scsi28,omitempty" tf:"scsi28,omitempty"`
+
+	Scsi29 []Scsi29Observation `json:"scsi29,omitempty" tf:"scsi29,omitempty"`
+
+	Scsi3 []Scsi3Observation `json:"scsi3,omitempty" tf:"scsi3,omitempty"`
+
+	Scsi30 []Scsi30Observation `json:"scsi30,omitempty" tf:"scsi30,omitempty"`
+
+	Scsi4 []Scsi4Observation `json:"scsi4,omitempty" tf:"scsi4,omitempty"`
+
+	Scsi5 []Scsi5Observation `json:"scsi5,omitempty" tf:"scsi5,omitempty"`
+
+	Scsi6 []Scsi6Observation `json:"scsi6,omitempty" tf:"scsi6,omitempty"`
+
+	Scsi7 []Scsi7Observation `json:"scsi7,omitempty" tf:"scsi7,omitempty"`
+
+	Scsi8 []Scsi8Observation `json:"scsi8,omitempty" tf:"scsi8,omitempty"`
+
+	Scsi9 []Scsi9Observation `json:"scsi9,omitempty" tf:"scsi9,omitempty"`
+}
+
+type ScsiParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Scsi0 []Scsi0Parameters `json:"scsi0,omitempty" tf:"scsi0,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Scsi1 []Scsi1Parameters `json:"scsi1,omitempty" tf:"scsi1,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Scsi10 []Scsi10Parameters `json:"scsi10,omitempty" tf:"scsi10,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Scsi11 []Scsi11Parameters `json:"scsi11,omitempty" tf:"scsi11,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Scsi12 []Scsi12Parameters `json:"scsi12,omitempty" tf:"scsi12,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Scsi13 []Scsi13Parameters `json:"scsi13,omitempty" tf:"scsi13,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Scsi14 []Scsi14Parameters `json:"scsi14,omitempty" tf:"scsi14,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Scsi15 []Scsi15Parameters `json:"scsi15,omitempty" tf:"scsi15,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Scsi16 []Scsi16Parameters `json:"scsi16,omitempty" tf:"scsi16,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Scsi17 []Scsi17Parameters `json:"scsi17,omitempty" tf:"scsi17,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Scsi18 []Scsi18Parameters `json:"scsi18,omitempty" tf:"scsi18,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Scsi19 []Scsi19Parameters `json:"scsi19,omitempty" tf:"scsi19,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Scsi2 []Scsi2Parameters `json:"scsi2,omitempty" tf:"scsi2,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Scsi20 []Scsi20Parameters `json:"scsi20,omitempty" tf:"scsi20,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Scsi21 []Scsi21Parameters `json:"scsi21,omitempty" tf:"scsi21,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Scsi22 []Scsi22Parameters `json:"scsi22,omitempty" tf:"scsi22,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Scsi23 []Scsi23Parameters `json:"scsi23,omitempty" tf:"scsi23,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Scsi24 []Scsi24Parameters `json:"scsi24,omitempty" tf:"scsi24,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Scsi25 []Scsi25Parameters `json:"scsi25,omitempty" tf:"scsi25,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Scsi26 []Scsi26Parameters `json:"scsi26,omitempty" tf:"scsi26,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Scsi27 []Scsi27Parameters `json:"scsi27,omitempty" tf:"scsi27,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Scsi28 []Scsi28Parameters `json:"scsi28,omitempty" tf:"scsi28,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Scsi29 []Scsi29Parameters `json:"scsi29,omitempty" tf:"scsi29,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Scsi3 []Scsi3Parameters `json:"scsi3,omitempty" tf:"scsi3,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Scsi30 []Scsi30Parameters `json:"scsi30,omitempty" tf:"scsi30,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Scsi4 []Scsi4Parameters `json:"scsi4,omitempty" tf:"scsi4,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Scsi5 []Scsi5Parameters `json:"scsi5,omitempty" tf:"scsi5,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Scsi6 []Scsi6Parameters `json:"scsi6,omitempty" tf:"scsi6,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Scsi7 []Scsi7Parameters `json:"scsi7,omitempty" tf:"scsi7,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Scsi8 []Scsi8Parameters `json:"scsi8,omitempty" tf:"scsi8,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Scsi9 []Scsi9Parameters `json:"scsi9,omitempty" tf:"scsi9,omitempty"`
 }
 
 type SerialObservation struct {
@@ -724,8 +14807,73 @@ type SerialParameters struct {
 	// +kubebuilder:validation:Required
 	ID *float64 `json:"id" tf:"id,omitempty"`
 
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type SmbiosObservation struct {
+	Family *string `json:"family,omitempty" tf:"family,omitempty"`
+
+	Manufacturer *string `json:"manufacturer,omitempty" tf:"manufacturer,omitempty"`
+
+	Product *string `json:"product,omitempty" tf:"product,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
+
+	UUID *string `json:"uuid,omitempty" tf:"uuid,omitempty"`
+
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+}
+
+type SmbiosParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Family *string `json:"family,omitempty" tf:"family,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Manufacturer *string `json:"manufacturer,omitempty" tf:"manufacturer,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Product *string `json:"product,omitempty" tf:"product,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	UUID *string `json:"uuid,omitempty" tf:"uuid,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+}
+
+type SpiceObservation struct {
+	Usb3 *bool `json:"usb3,omitempty" tf:"usb3,omitempty"`
+}
+
+type SpiceParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Usb3 *bool `json:"usb3,omitempty" tf:"usb3,omitempty"`
+}
+
+type TpmStateObservation struct {
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+}
+
+type TpmStateParameters struct {
+
 	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type UnusedDiskObservation struct {
@@ -739,19 +14887,429 @@ type UnusedDiskObservation struct {
 type UnusedDiskParameters struct {
 }
 
+type Usb0MappingObservation struct {
+	MappingID *string `json:"mappingId,omitempty" tf:"mapping_id,omitempty"`
+
+	Usb3 *bool `json:"usb3,omitempty" tf:"usb3,omitempty"`
+}
+
+type Usb0MappingParameters struct {
+
+	// +kubebuilder:validation:Required
+	MappingID *string `json:"mappingId" tf:"mapping_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Usb3 *bool `json:"usb3,omitempty" tf:"usb3,omitempty"`
+}
+
+type Usb0Observation struct {
+	Device []DeviceObservation `json:"device,omitempty" tf:"device,omitempty"`
+
+	Mapping []Usb0MappingObservation `json:"mapping,omitempty" tf:"mapping,omitempty"`
+
+	Port []PortObservation `json:"port,omitempty" tf:"port,omitempty"`
+
+	Spice []SpiceObservation `json:"spice,omitempty" tf:"spice,omitempty"`
+}
+
+type Usb0Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Device []DeviceParameters `json:"device,omitempty" tf:"device,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Mapping []Usb0MappingParameters `json:"mapping,omitempty" tf:"mapping,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Port []PortParameters `json:"port,omitempty" tf:"port,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Spice []SpiceParameters `json:"spice,omitempty" tf:"spice,omitempty"`
+}
+
+type Usb1DeviceObservation struct {
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	Usb3 *bool `json:"usb3,omitempty" tf:"usb3,omitempty"`
+}
+
+type Usb1DeviceParameters struct {
+
+	// +kubebuilder:validation:Required
+	DeviceID *string `json:"deviceId" tf:"device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Usb3 *bool `json:"usb3,omitempty" tf:"usb3,omitempty"`
+}
+
+type Usb1MappingObservation struct {
+	MappingID *string `json:"mappingId,omitempty" tf:"mapping_id,omitempty"`
+
+	Usb3 *bool `json:"usb3,omitempty" tf:"usb3,omitempty"`
+}
+
+type Usb1MappingParameters struct {
+
+	// +kubebuilder:validation:Required
+	MappingID *string `json:"mappingId" tf:"mapping_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Usb3 *bool `json:"usb3,omitempty" tf:"usb3,omitempty"`
+}
+
+type Usb1Observation struct {
+	Device []Usb1DeviceObservation `json:"device,omitempty" tf:"device,omitempty"`
+
+	Mapping []Usb1MappingObservation `json:"mapping,omitempty" tf:"mapping,omitempty"`
+
+	Port []Usb1PortObservation `json:"port,omitempty" tf:"port,omitempty"`
+
+	Spice []Usb1SpiceObservation `json:"spice,omitempty" tf:"spice,omitempty"`
+}
+
+type Usb1Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Device []Usb1DeviceParameters `json:"device,omitempty" tf:"device,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Mapping []Usb1MappingParameters `json:"mapping,omitempty" tf:"mapping,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Port []Usb1PortParameters `json:"port,omitempty" tf:"port,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Spice []Usb1SpiceParameters `json:"spice,omitempty" tf:"spice,omitempty"`
+}
+
+type Usb1PortObservation struct {
+	PortID *string `json:"portId,omitempty" tf:"port_id,omitempty"`
+
+	Usb3 *bool `json:"usb3,omitempty" tf:"usb3,omitempty"`
+}
+
+type Usb1PortParameters struct {
+
+	// +kubebuilder:validation:Required
+	PortID *string `json:"portId" tf:"port_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Usb3 *bool `json:"usb3,omitempty" tf:"usb3,omitempty"`
+}
+
+type Usb1SpiceObservation struct {
+	Usb3 *bool `json:"usb3,omitempty" tf:"usb3,omitempty"`
+}
+
+type Usb1SpiceParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Usb3 *bool `json:"usb3,omitempty" tf:"usb3,omitempty"`
+}
+
+type Usb2DeviceObservation struct {
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	Usb3 *bool `json:"usb3,omitempty" tf:"usb3,omitempty"`
+}
+
+type Usb2DeviceParameters struct {
+
+	// +kubebuilder:validation:Required
+	DeviceID *string `json:"deviceId" tf:"device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Usb3 *bool `json:"usb3,omitempty" tf:"usb3,omitempty"`
+}
+
+type Usb2MappingObservation struct {
+	MappingID *string `json:"mappingId,omitempty" tf:"mapping_id,omitempty"`
+
+	Usb3 *bool `json:"usb3,omitempty" tf:"usb3,omitempty"`
+}
+
+type Usb2MappingParameters struct {
+
+	// +kubebuilder:validation:Required
+	MappingID *string `json:"mappingId" tf:"mapping_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Usb3 *bool `json:"usb3,omitempty" tf:"usb3,omitempty"`
+}
+
+type Usb2Observation struct {
+	Device []Usb2DeviceObservation `json:"device,omitempty" tf:"device,omitempty"`
+
+	Mapping []Usb2MappingObservation `json:"mapping,omitempty" tf:"mapping,omitempty"`
+
+	Port []Usb2PortObservation `json:"port,omitempty" tf:"port,omitempty"`
+
+	Spice []Usb2SpiceObservation `json:"spice,omitempty" tf:"spice,omitempty"`
+}
+
+type Usb2Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Device []Usb2DeviceParameters `json:"device,omitempty" tf:"device,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Mapping []Usb2MappingParameters `json:"mapping,omitempty" tf:"mapping,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Port []Usb2PortParameters `json:"port,omitempty" tf:"port,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Spice []Usb2SpiceParameters `json:"spice,omitempty" tf:"spice,omitempty"`
+}
+
+type Usb2PortObservation struct {
+	PortID *string `json:"portId,omitempty" tf:"port_id,omitempty"`
+
+	Usb3 *bool `json:"usb3,omitempty" tf:"usb3,omitempty"`
+}
+
+type Usb2PortParameters struct {
+
+	// +kubebuilder:validation:Required
+	PortID *string `json:"portId" tf:"port_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Usb3 *bool `json:"usb3,omitempty" tf:"usb3,omitempty"`
+}
+
+type Usb2SpiceObservation struct {
+	Usb3 *bool `json:"usb3,omitempty" tf:"usb3,omitempty"`
+}
+
+type Usb2SpiceParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Usb3 *bool `json:"usb3,omitempty" tf:"usb3,omitempty"`
+}
+
+type Usb3DeviceObservation struct {
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	Usb3 *bool `json:"usb3,omitempty" tf:"usb3,omitempty"`
+}
+
+type Usb3DeviceParameters struct {
+
+	// +kubebuilder:validation:Required
+	DeviceID *string `json:"deviceId" tf:"device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Usb3 *bool `json:"usb3,omitempty" tf:"usb3,omitempty"`
+}
+
+type Usb3MappingObservation struct {
+	MappingID *string `json:"mappingId,omitempty" tf:"mapping_id,omitempty"`
+
+	Usb3 *bool `json:"usb3,omitempty" tf:"usb3,omitempty"`
+}
+
+type Usb3MappingParameters struct {
+
+	// +kubebuilder:validation:Required
+	MappingID *string `json:"mappingId" tf:"mapping_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Usb3 *bool `json:"usb3,omitempty" tf:"usb3,omitempty"`
+}
+
+type Usb3Observation struct {
+	Device []Usb3DeviceObservation `json:"device,omitempty" tf:"device,omitempty"`
+
+	Mapping []Usb3MappingObservation `json:"mapping,omitempty" tf:"mapping,omitempty"`
+
+	Port []Usb3PortObservation `json:"port,omitempty" tf:"port,omitempty"`
+
+	Spice []Usb3SpiceObservation `json:"spice,omitempty" tf:"spice,omitempty"`
+}
+
+type Usb3Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Device []Usb3DeviceParameters `json:"device,omitempty" tf:"device,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Mapping []Usb3MappingParameters `json:"mapping,omitempty" tf:"mapping,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Port []Usb3PortParameters `json:"port,omitempty" tf:"port,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Spice []Usb3SpiceParameters `json:"spice,omitempty" tf:"spice,omitempty"`
+}
+
+type Usb3PortObservation struct {
+	PortID *string `json:"portId,omitempty" tf:"port_id,omitempty"`
+
+	Usb3 *bool `json:"usb3,omitempty" tf:"usb3,omitempty"`
+}
+
+type Usb3PortParameters struct {
+
+	// +kubebuilder:validation:Required
+	PortID *string `json:"portId" tf:"port_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Usb3 *bool `json:"usb3,omitempty" tf:"usb3,omitempty"`
+}
+
+type Usb3SpiceObservation struct {
+	Usb3 *bool `json:"usb3,omitempty" tf:"usb3,omitempty"`
+}
+
+type Usb3SpiceParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Usb3 *bool `json:"usb3,omitempty" tf:"usb3,omitempty"`
+}
+
+type Usb4DeviceObservation struct {
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	Usb3 *bool `json:"usb3,omitempty" tf:"usb3,omitempty"`
+}
+
+type Usb4DeviceParameters struct {
+
+	// +kubebuilder:validation:Required
+	DeviceID *string `json:"deviceId" tf:"device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Usb3 *bool `json:"usb3,omitempty" tf:"usb3,omitempty"`
+}
+
+type Usb4MappingObservation struct {
+	MappingID *string `json:"mappingId,omitempty" tf:"mapping_id,omitempty"`
+
+	Usb3 *bool `json:"usb3,omitempty" tf:"usb3,omitempty"`
+}
+
+type Usb4MappingParameters struct {
+
+	// +kubebuilder:validation:Required
+	MappingID *string `json:"mappingId" tf:"mapping_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Usb3 *bool `json:"usb3,omitempty" tf:"usb3,omitempty"`
+}
+
+type Usb4Observation struct {
+	Device []Usb4DeviceObservation `json:"device,omitempty" tf:"device,omitempty"`
+
+	Mapping []Usb4MappingObservation `json:"mapping,omitempty" tf:"mapping,omitempty"`
+
+	Port []Usb4PortObservation `json:"port,omitempty" tf:"port,omitempty"`
+
+	Spice []Usb4SpiceObservation `json:"spice,omitempty" tf:"spice,omitempty"`
+}
+
+type Usb4Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Device []Usb4DeviceParameters `json:"device,omitempty" tf:"device,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Mapping []Usb4MappingParameters `json:"mapping,omitempty" tf:"mapping,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Port []Usb4PortParameters `json:"port,omitempty" tf:"port,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Spice []Usb4SpiceParameters `json:"spice,omitempty" tf:"spice,omitempty"`
+}
+
+type Usb4PortObservation struct {
+	PortID *string `json:"portId,omitempty" tf:"port_id,omitempty"`
+
+	Usb3 *bool `json:"usb3,omitempty" tf:"usb3,omitempty"`
+}
+
+type Usb4PortParameters struct {
+
+	// +kubebuilder:validation:Required
+	PortID *string `json:"portId" tf:"port_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Usb3 *bool `json:"usb3,omitempty" tf:"usb3,omitempty"`
+}
+
+type Usb4SpiceObservation struct {
+	Usb3 *bool `json:"usb3,omitempty" tf:"usb3,omitempty"`
+}
+
+type Usb4SpiceParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Usb3 *bool `json:"usb3,omitempty" tf:"usb3,omitempty"`
+}
+
 type UsbObservation struct {
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
 	Host *string `json:"host,omitempty" tf:"host,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	MappingID *string `json:"mappingId,omitempty" tf:"mapping_id,omitempty"`
+
+	PortID *string `json:"portId,omitempty" tf:"port_id,omitempty"`
 
 	Usb3 *bool `json:"usb3,omitempty" tf:"usb3,omitempty"`
 }
 
 type UsbParameters struct {
 
+	// +kubebuilder:validation:Optional
+	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Host *string `json:"host,omitempty" tf:"host,omitempty"`
+
 	// +kubebuilder:validation:Required
-	Host *string `json:"host" tf:"host,omitempty"`
+	ID *float64 `json:"id" tf:"id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MappingID *string `json:"mappingId,omitempty" tf:"mapping_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	PortID *string `json:"portId,omitempty" tf:"port_id,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Usb3 *bool `json:"usb3,omitempty" tf:"usb3,omitempty"`
+}
+
+type UsbsObservation struct {
+	Usb0 []Usb0Observation `json:"usb0,omitempty" tf:"usb0,omitempty"`
+
+	Usb1 []Usb1Observation `json:"usb1,omitempty" tf:"usb1,omitempty"`
+
+	Usb2 []Usb2Observation `json:"usb2,omitempty" tf:"usb2,omitempty"`
+
+	Usb3 []Usb3Observation `json:"usb3,omitempty" tf:"usb3,omitempty"`
+
+	Usb4 []Usb4Observation `json:"usb4,omitempty" tf:"usb4,omitempty"`
+}
+
+type UsbsParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Usb0 []Usb0Parameters `json:"usb0,omitempty" tf:"usb0,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Usb1 []Usb1Parameters `json:"usb1,omitempty" tf:"usb1,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Usb2 []Usb2Parameters `json:"usb2,omitempty" tf:"usb2,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Usb3 []Usb3Parameters `json:"usb3,omitempty" tf:"usb3,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Usb4 []Usb4Parameters `json:"usb4,omitempty" tf:"usb4,omitempty"`
 }
 
 type VgaObservation struct {
@@ -769,6 +15327,4347 @@ type VgaParameters struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
+type Virtio0CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio0CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio0DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio0DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio0Observation struct {
+	Cdrom []Virtio0CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Disk []Virtio0DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Virtio0PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio0Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Virtio0CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Virtio0DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Virtio0PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio0PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio0PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio10CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio10CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio10DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio10DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio10Observation struct {
+	Cdrom []Virtio10CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Disk []Virtio10DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Virtio10PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio10Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Virtio10CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Virtio10DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Virtio10PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio10PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio10PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio11CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio11CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio11DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio11DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio11Observation struct {
+	Cdrom []Virtio11CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Disk []Virtio11DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Virtio11PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio11Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Virtio11CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Virtio11DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Virtio11PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio11PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio11PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio12CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio12CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio12DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio12DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio12Observation struct {
+	Cdrom []Virtio12CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Disk []Virtio12DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Virtio12PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio12Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Virtio12CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Virtio12DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Virtio12PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio12PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio12PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio13CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio13CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio13DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio13DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio13Observation struct {
+	Cdrom []Virtio13CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Disk []Virtio13DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Virtio13PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio13Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Virtio13CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Virtio13DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Virtio13PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio13PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio13PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio14CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio14CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio14DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio14DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio14Observation struct {
+	Cdrom []Virtio14CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Disk []Virtio14DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Virtio14PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio14Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Virtio14CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Virtio14DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Virtio14PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio14PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio14PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio15CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio15CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio15DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio15DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio15Observation struct {
+	Cdrom []Virtio15CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Disk []Virtio15DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Virtio15PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio15Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Virtio15CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Virtio15DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Virtio15PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio15PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio15PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio1CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio1CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio1DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio1DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio1Observation struct {
+	Cdrom []Virtio1CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Disk []Virtio1DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Virtio1PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio1Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Virtio1CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Virtio1DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Virtio1PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio1PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio1PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio2CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio2CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio2DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio2DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio2Observation struct {
+	Cdrom []Virtio2CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Disk []Virtio2DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Virtio2PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio2Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Virtio2CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Virtio2DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Virtio2PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio2PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio2PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio3CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio3CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio3DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio3DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio3Observation struct {
+	Cdrom []Virtio3CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Disk []Virtio3DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Virtio3PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio3Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Virtio3CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Virtio3DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Virtio3PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio3PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio3PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio4CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio4CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio4DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio4DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio4Observation struct {
+	Cdrom []Virtio4CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Disk []Virtio4DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Virtio4PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio4Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Virtio4CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Virtio4DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Virtio4PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio4PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio4PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio5CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio5CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio5DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio5DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio5Observation struct {
+	Cdrom []Virtio5CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Disk []Virtio5DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Virtio5PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio5Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Virtio5CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Virtio5DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Virtio5PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio5PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio5PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio6CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio6CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio6DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio6DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio6Observation struct {
+	Cdrom []Virtio6CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Disk []Virtio6DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Virtio6PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio6Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Virtio6CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Virtio6DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Virtio6PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio6PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio6PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio7CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio7CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio7DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio7DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio7Observation struct {
+	Cdrom []Virtio7CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Disk []Virtio7DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Virtio7PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio7Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Virtio7CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Virtio7DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Virtio7PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio7PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio7PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio8CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio8CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio8DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio8DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio8Observation struct {
+	Cdrom []Virtio8CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Disk []Virtio8DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Virtio8PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio8Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Virtio8CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Virtio8DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Virtio8PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio8PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio8PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio9CdromObservation struct {
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio9CdromParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Iso *string `json:"iso,omitempty" tf:"iso,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough *bool `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio9DiskObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	ID *float64 `json:"id,omitempty" tf:"id,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	LinkedDiskID *float64 `json:"linkedDiskId,omitempty" tf:"linked_disk_id,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Storage *string `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio9DiskParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
+
+	// +kubebuilder:validation:Required
+	Storage *string `json:"storage" tf:"storage,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio9Observation struct {
+	Cdrom []Virtio9CdromObservation `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	Disk []Virtio9DiskObservation `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	Passthrough []Virtio9PassthroughObservation `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio9Parameters struct {
+
+	// +kubebuilder:validation:Optional
+	Cdrom []Virtio9CdromParameters `json:"cdrom,omitempty" tf:"cdrom,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Disk []Virtio9DiskParameters `json:"disk,omitempty" tf:"disk,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Ignore *bool `json:"ignore,omitempty" tf:"ignore,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Passthrough []Virtio9PassthroughParameters `json:"passthrough,omitempty" tf:"passthrough,omitempty"`
+}
+
+type Virtio9PassthroughObservation struct {
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	File *string `json:"file,omitempty" tf:"file,omitempty"`
+
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type Virtio9PassthroughParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Asyncio *string `json:"asyncio,omitempty" tf:"asyncio,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Backup *bool `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Cache *string `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Discard *bool `json:"discard,omitempty" tf:"discard,omitempty"`
+
+	// +kubebuilder:validation:Required
+	File *string `json:"file" tf:"file,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurst *float64 `json:"iopsRBurst,omitempty" tf:"iops_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRBurstLength *float64 `json:"iopsRBurstLength,omitempty" tf:"iops_r_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsRConcurrent *float64 `json:"iopsRConcurrent,omitempty" tf:"iops_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurst *float64 `json:"iopsWrBurst,omitempty" tf:"iops_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrBurstLength *float64 `json:"iopsWrBurstLength,omitempty" tf:"iops_wr_burst_length,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IopsWrConcurrent *float64 `json:"iopsWrConcurrent,omitempty" tf:"iops_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Iothread *bool `json:"iothread,omitempty" tf:"iothread,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRBurst *float64 `json:"mbpsRBurst,omitempty" tf:"mbps_r_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsRConcurrent *float64 `json:"mbpsRConcurrent,omitempty" tf:"mbps_r_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrBurst *float64 `json:"mbpsWrBurst,omitempty" tf:"mbps_wr_burst,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MbpsWrConcurrent *float64 `json:"mbpsWrConcurrent,omitempty" tf:"mbps_wr_concurrent,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Readonly *bool `json:"readonly,omitempty" tf:"readonly,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Replicate *bool `json:"replicate,omitempty" tf:"replicate,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Wwn *string `json:"wwn,omitempty" tf:"wwn,omitempty"`
+}
+
+type VirtioObservation struct {
+	Virtio0 []Virtio0Observation `json:"virtio0,omitempty" tf:"virtio0,omitempty"`
+
+	Virtio1 []Virtio1Observation `json:"virtio1,omitempty" tf:"virtio1,omitempty"`
+
+	Virtio10 []Virtio10Observation `json:"virtio10,omitempty" tf:"virtio10,omitempty"`
+
+	Virtio11 []Virtio11Observation `json:"virtio11,omitempty" tf:"virtio11,omitempty"`
+
+	Virtio12 []Virtio12Observation `json:"virtio12,omitempty" tf:"virtio12,omitempty"`
+
+	Virtio13 []Virtio13Observation `json:"virtio13,omitempty" tf:"virtio13,omitempty"`
+
+	Virtio14 []Virtio14Observation `json:"virtio14,omitempty" tf:"virtio14,omitempty"`
+
+	Virtio15 []Virtio15Observation `json:"virtio15,omitempty" tf:"virtio15,omitempty"`
+
+	Virtio2 []Virtio2Observation `json:"virtio2,omitempty" tf:"virtio2,omitempty"`
+
+	Virtio3 []Virtio3Observation `json:"virtio3,omitempty" tf:"virtio3,omitempty"`
+
+	Virtio4 []Virtio4Observation `json:"virtio4,omitempty" tf:"virtio4,omitempty"`
+
+	Virtio5 []Virtio5Observation `json:"virtio5,omitempty" tf:"virtio5,omitempty"`
+
+	Virtio6 []Virtio6Observation `json:"virtio6,omitempty" tf:"virtio6,omitempty"`
+
+	Virtio7 []Virtio7Observation `json:"virtio7,omitempty" tf:"virtio7,omitempty"`
+
+	Virtio8 []Virtio8Observation `json:"virtio8,omitempty" tf:"virtio8,omitempty"`
+
+	Virtio9 []Virtio9Observation `json:"virtio9,omitempty" tf:"virtio9,omitempty"`
+}
+
+type VirtioParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Virtio0 []Virtio0Parameters `json:"virtio0,omitempty" tf:"virtio0,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Virtio1 []Virtio1Parameters `json:"virtio1,omitempty" tf:"virtio1,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Virtio10 []Virtio10Parameters `json:"virtio10,omitempty" tf:"virtio10,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Virtio11 []Virtio11Parameters `json:"virtio11,omitempty" tf:"virtio11,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Virtio12 []Virtio12Parameters `json:"virtio12,omitempty" tf:"virtio12,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Virtio13 []Virtio13Parameters `json:"virtio13,omitempty" tf:"virtio13,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Virtio14 []Virtio14Parameters `json:"virtio14,omitempty" tf:"virtio14,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Virtio15 []Virtio15Parameters `json:"virtio15,omitempty" tf:"virtio15,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Virtio2 []Virtio2Parameters `json:"virtio2,omitempty" tf:"virtio2,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Virtio3 []Virtio3Parameters `json:"virtio3,omitempty" tf:"virtio3,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Virtio4 []Virtio4Parameters `json:"virtio4,omitempty" tf:"virtio4,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Virtio5 []Virtio5Parameters `json:"virtio5,omitempty" tf:"virtio5,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Virtio6 []Virtio6Parameters `json:"virtio6,omitempty" tf:"virtio6,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Virtio7 []Virtio7Parameters `json:"virtio7,omitempty" tf:"virtio7,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Virtio8 []Virtio8Parameters `json:"virtio8,omitempty" tf:"virtio8,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Virtio9 []Virtio9Parameters `json:"virtio9,omitempty" tf:"virtio9,omitempty"`
+}
+
 // QemuSpec defines the desired state of Qemu
 type QemuSpec struct {
 	v1.ResourceSpec `json:",inline"`
@@ -783,7 +19682,7 @@ type QemuStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Qemu is the Schema for the Qemus API. Provides a resource to manage VM
+// Qemu is the Schema for the Qemus API. <no value>
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
@@ -793,9 +19692,8 @@ type QemuStatus struct {
 type Qemu struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.targetNode)",message="targetNode is a required parameter"
-	Spec   QemuSpec   `json:"spec"`
-	Status QemuStatus `json:"status,omitempty"`
+	Spec              QemuSpec   `json:"spec"`
+	Status            QemuStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true
