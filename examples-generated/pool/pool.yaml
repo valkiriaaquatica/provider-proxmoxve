@@ -1,0 +1,9 @@
+apiVersion: pool.proxmoxve.upbound.io/v1alpha1
+kind: Pool
+metadata:
+  name: test-pool
+spec:
+  forProvider:
+    name: pool
+  providerConfigRef:
+    name: default

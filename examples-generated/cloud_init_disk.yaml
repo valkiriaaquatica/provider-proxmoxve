@@ -1,0 +1,17 @@
+apiVersion: disk.proxmoxve.upbound.io/v1alpha1
+kind: Disk
+metadata:
+  name: test-disk
+spec:
+  providerConfigRef:
+    name: default
+  deletionPolicy: Delete
+  forProvider:
+    container: "vm-101"
+    mp: "/mnt/data"
+    size: "10G"  
+    slot: 0     
+    storage: "local-lvm" 
+    backup: true
+    shared: false
+    quota: false
