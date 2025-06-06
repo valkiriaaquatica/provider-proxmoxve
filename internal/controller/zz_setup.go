@@ -9,9 +9,9 @@ import (
 
 	"github.com/upbound/upjet/pkg/controller"
 
-	lxc "github.com/dougsong/provider-proxmoxve/internal/controller/lxc/lxc"
-	providerconfig "github.com/dougsong/provider-proxmoxve/internal/controller/providerconfig"
-	qemu "github.com/dougsong/provider-proxmoxve/internal/controller/vm/qemu"
+	lxc "github.com/valkiriaaquatica/provider-proxmoxve/internal/controller/lxc/lxc"
+	providerconfig "github.com/valkiriaaquatica/provider-proxmoxve/internal/controller/providerconfig"
+	qemu "github.com/valkiriaaquatica/provider-proxmoxve/internal/controller/vm/qemu"
 )
 
 // Setup creates all controllers with the supplied logger and adds them to

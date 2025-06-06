@@ -11,7 +11,7 @@ import (
 
 	"github.com/upbound/upjet/pkg/pipeline"
 
-	"github.com/dougsong/provider-proxmoxve/config"
+	"github.com/valkiriaaquatica/provider-proxmoxve/config"
 )
 
 func main() {

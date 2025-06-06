@@ -18,8 +18,8 @@ import (
 	"github.com/upbound/upjet/pkg/terraform"
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	v1alpha1 "github.com/dougsong/provider-proxmoxve/apis/vm/v1alpha1"
-	features "github.com/dougsong/provider-proxmoxve/internal/features"
+	v1alpha1 "github.com/valkiriaaquatica/provider-proxmoxve/apis/vm/v1alpha1"
+	features "github.com/valkiriaaquatica/provider-proxmoxve/internal/features"
 )
 
 // Setup adds a controller that reconciles Qemu managed resources.

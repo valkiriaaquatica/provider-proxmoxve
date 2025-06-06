@@ -2,16 +2,16 @@
 # Setup Project
 
 PROJECT_NAME ?= provider-proxmoxve
-PROJECT_REPO ?= github.com/dougsong/$(PROJECT_NAME)
+PROJECT_REPO ?= github.com/valkiriaaquatica/$(PROJECT_NAME)
 
 export TERRAFORM_VERSION ?= 1.3.3
 
 export TERRAFORM_PROVIDER_SOURCE ?= Telmate/proxmox
 export TERRAFORM_PROVIDER_REPO ?= https://github.com/Telmate/terraform-provider-proxmox
-export TERRAFORM_PROVIDER_VERSION ?= 2.9.14
+export TERRAFORM_PROVIDER_VERSION ?= 3.0.2-rc01
 export TERRAFORM_PROVIDER_DOWNLOAD_NAME ?= terraform-provider-proxmox
 export TERRAFORM_PROVIDER_DOWNLOAD_URL_PREFIX ?= https://github.com/Telmate/$(TERRAFORM_PROVIDER_DOWNLOAD_NAME)/releases/download/v$(TERRAFORM_PROVIDER_VERSION)
-export TERRAFORM_NATIVE_PROVIDER_BINARY ?= terraform-provider-proxmox_v2.9.14
+export TERRAFORM_NATIVE_PROVIDER_BINARY ?= terraform-provider-proxmox_v3.0.2-rc01
 export TERRAFORM_DOCS_PATH ?= docs/resources
 
 
@@ -121,7 +121,7 @@ $(TERRAFORM_PROVIDER_SCHEMA): $(TERRAFORM)
 pull-docs:
 	@if [ ! -d "$(WORK_DIR)/$(TERRAFORM_PROVIDER_SOURCE)" ]; then \
   		mkdir -p "$(WORK_DIR)/$(TERRAFORM_PROVIDER_SOURCE)" && \
-		git clone -c advice.detachedHead=false --depth 1 --filter=blob:none --branch "v$(TERRAFORM_PROVIDER_VERSION)" --sparse "$(TERRAFORM_PROVIDER_REPO)" "$(WORK_DIR)/$(TERRAFORM_PROVIDER_SOURCE)"; \
+		git clone -c advice.detachedHead=false --depth 1 --filter=blob:none --branch master --sparse "$(TERRAFORM_PROVIDER_REPO)" "$(WORK_DIR)/$(TERRAFORM_PROVIDER_SOURCE)"; \
 	fi
 	@git -C "$(WORK_DIR)/$(TERRAFORM_PROVIDER_SOURCE)" sparse-checkout set "$(TERRAFORM_DOCS_PATH)"
 

@@ -9,7 +9,7 @@ import (
 	"encoding/json"
 
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
-	"github.com/dougsong/provider-proxmoxve/apis/v1beta1"
+	"github.com/valkiriaaquatica/provider-proxmoxve/apis/v1beta1"
 	"github.com/pkg/errors"
 	"github.com/upbound/upjet/pkg/terraform"
 	"k8s.io/apimachinery/pkg/types"

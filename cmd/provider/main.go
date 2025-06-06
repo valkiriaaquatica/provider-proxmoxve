@@ -25,12 +25,12 @@ import (
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 
-	"github.com/dougsong/provider-proxmoxve/apis"
-	"github.com/dougsong/provider-proxmoxve/apis/v1alpha1"
-	"github.com/dougsong/provider-proxmoxve/config"
-	"github.com/dougsong/provider-proxmoxve/internal/clients"
-	"github.com/dougsong/provider-proxmoxve/internal/controller"
-	"github.com/dougsong/provider-proxmoxve/internal/features"
+	"github.com/valkiriaaquatica/provider-proxmoxve/apis"
+	"github.com/valkiriaaquatica/provider-proxmoxve/apis/v1alpha1"
+	"github.com/valkiriaaquatica/provider-proxmoxve/config"
+	"github.com/valkiriaaquatica/provider-proxmoxve/internal/clients"
+	"github.com/valkiriaaquatica/provider-proxmoxve/internal/controller"
+	"github.com/valkiriaaquatica/provider-proxmoxve/internal/features"
 )
 
 func main() {

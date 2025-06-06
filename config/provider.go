@@ -8,14 +8,14 @@ import (
 	// Note(turkenh): we are importing this to embed provider schema document
 	_ "embed"
 
-	"github.com/dougsong/provider-proxmoxve/config/lxc"
-	"github.com/dougsong/provider-proxmoxve/config/vm"
+	"github.com/valkiriaaquatica/provider-proxmoxve/config/lxc"
+	"github.com/valkiriaaquatica/provider-proxmoxve/config/vm"
 	ujconfig "github.com/upbound/upjet/pkg/config"
 )
 
 const (
 	resourcePrefix = "proxmoxve"
-	modulePath     = "github.com/dougsong/provider-proxmoxve"
+	modulePath     = "github.com/valkiriaaquatica/provider-proxmoxve"
 )
 
 //go:embed schema.json

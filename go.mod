@@ -1,4 +1,4 @@
-module github.com/dougsong/provider-proxmoxve
+module github.com/valkiriaaquatica/provider-proxmoxve
 
 go 1.19
 
