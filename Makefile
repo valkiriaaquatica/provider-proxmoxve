@@ -7,7 +7,7 @@ PROJECT_REPO ?= github.com/valkiriaaquatica/$(PROJECT_NAME)
 export TERRAFORM_VERSION ?= 1.3.3
 
 export TERRAFORM_PROVIDER_SOURCE ?= Telmate/proxmox
-export TERRAFORM_PROVIDER_REPO ?= https://github.com/Telmate/terraform-provider-proxmox
+export TERRAFORM_PROVIDER_REPO ?= https://github.com/valkiriaaquatica/terraform-provider-proxmox
 export TERRAFORM_PROVIDER_VERSION ?= 3.0.2-rc01
 export TERRAFORM_PROVIDER_DOWNLOAD_NAME ?= terraform-provider-proxmox
 export TERRAFORM_PROVIDER_DOWNLOAD_URL_PREFIX ?= https://github.com/Telmate/$(TERRAFORM_PROVIDER_DOWNLOAD_NAME)/releases/download/v$(TERRAFORM_PROVIDER_VERSION)
