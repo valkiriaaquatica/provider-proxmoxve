@@ -9,7 +9,9 @@ import (
 
 	"github.com/upbound/upjet/pkg/controller"
 
+	disk "github.com/valkiriaaquatica/provider-proxmoxve/internal/controller/disk/disk"
 	lxc "github.com/valkiriaaquatica/provider-proxmoxve/internal/controller/lxc/lxc"
+	pool "github.com/valkiriaaquatica/provider-proxmoxve/internal/controller/pool/pool"
 	providerconfig "github.com/valkiriaaquatica/provider-proxmoxve/internal/controller/providerconfig"
 	qemu "github.com/valkiriaaquatica/provider-proxmoxve/internal/controller/vm/qemu"
 )
@@ -18,7 +20,9 @@ import (
 // the supplied manager.
 func Setup(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		disk.Setup,
 		lxc.Setup,
+		pool.Setup,
 		providerconfig.Setup,
 		qemu.Setup,
 	} {
