@@ -5,18 +5,18 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
-  name: lxcs.lxc.proxmoxve.upbound.io
+  name: pools.pool.proxmoxve.upbound.io
 spec:
-  group: lxc.proxmoxve.upbound.io
+  group: pool.proxmoxve.upbound.io
   names:
     categories:
     - crossplane
     - managed
     - proxmoxve
-    kind: Lxc
-    listKind: LxcList
-    plural: lxcs
-    singular: lxc
+    kind: Pool
+    listKind: PoolList
+    plural: pools
+    singular: pool
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -35,7 +35,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Lxc is the Schema for the Lxcs API. <no value>
+        description: Pool is the Schema for the Pools API. <no value>
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -50,7 +50,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: LxcSpec defines the desired state of Lxc
+            description: PoolSpec defines the desired state of Pool
             properties:
               deletionPolicy:
                 default: Delete
@@ -67,205 +67,10 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  arch:
+                  comment:
                     type: string
-                  bwlimit:
-                    type: number
-                  clone:
+                  poolid:
                     type: string
-                  cloneStorage:
-                    type: string
-                  cmode:
-                    type: string
-                  console:
-                    type: boolean
-                  cores:
-                    type: number
-                  cpulimit:
-                    type: number
-                  cpuunits:
-                    type: number
-                  description:
-                    type: string
-                  features:
-                    items:
-                      properties:
-                        fuse:
-                          type: boolean
-                        keyctl:
-                          type: boolean
-                        mknod:
-                          type: boolean
-                        mount:
-                          type: string
-                        nesting:
-                          type: boolean
-                      type: object
-                    type: array
-                  force:
-                    type: boolean
-                  full:
-                    type: boolean
-                  hagroup:
-                    type: string
-                  hastate:
-                    type: string
-                  hookscript:
-                    type: string
-                  hostname:
-                    type: string
-                  ignoreUnpackErrors:
-                    type: boolean
-                  lock:
-                    type: string
-                  memory:
-                    type: number
-                  mountpoint:
-                    items:
-                      properties:
-                        acl:
-                          type: boolean
-                        backup:
-                          type: boolean
-                        file:
-                          type: string
-                        key:
-                          type: string
-                        mp:
-                          type: string
-                        quota:
-                          type: boolean
-                        replicate:
-                          type: boolean
-                        shared:
-                          type: boolean
-                        size:
-                          type: string
-                        slot:
-                          type: number
-                        storage:
-                          type: string
-                        volume:
-                          type: string
-                      required:
-                      - key
-                      - mp
-                      - slot
-                      type: object
-                    type: array
-                  nameserver:
-                    type: string
-                  network:
-                    items:
-                      properties:
-                        bridge:
-                          type: string
-                        firewall:
-                          type: boolean
-                        gw:
-                          type: string
-                        gw6:
-                          type: string
-                        hwaddr:
-                          type: string
-                        ip:
-                          type: string
-                        ip6:
-                          type: string
-                        mtu:
-                          type: number
-                        name:
-                          type: string
-                        rate:
-                          type: number
-                        tag:
-                          type: number
-                        trunks:
-                          type: string
-                        type:
-                          type: string
-                      required:
-                      - name
-                      type: object
-                    type: array
-                  onboot:
-                    type: boolean
-                  ostemplate:
-                    type: string
-                  ostype:
-                    type: string
-                  passwordSecretRef:
-                    description: A SecretKeySelector is a reference to a secret key
-                      in an arbitrary namespace.
-                    properties:
-                      key:
-                        description: The key to select.
-                        type: string
-                      name:
-                        description: Name of the secret.
-                        type: string
-                      namespace:
-                        description: Namespace of the secret.
-                        type: string
-                    required:
-                    - key
-                    - name
-                    - namespace
-                    type: object
-                  pool:
-                    type: string
-                  protection:
-                    type: boolean
-                  restore:
-                    type: boolean
-                  rootfs:
-                    items:
-                      properties:
-                        acl:
-                          type: boolean
-                        quota:
-                          type: boolean
-                        replicate:
-                          type: boolean
-                        ro:
-                          type: boolean
-                        shared:
-                          type: boolean
-                        size:
-                          type: string
-                        storage:
-                          type: string
-                      required:
-                      - size
-                      - storage
-                      type: object
-                    type: array
-                  searchdomain:
-                    type: string
-                  sshPublicKeys:
-                    type: string
-                  start:
-                    type: boolean
-                  startup:
-                    type: string
-                  swap:
-                    type: number
-                  tags:
-                    type: string
-                  targetNode:
-                    description: The node the lxc guest goes to.
-                    type: string
-                  template:
-                    type: boolean
-                  tty:
-                    type: number
-                  unique:
-                    type: boolean
-                  unprivileged:
-                    type: boolean
-                  vmid:
-                    description: The VM identifier in proxmox (100-999999999)
-                    type: number
                 type: object
               managementPolicy:
                 default: FullControl
@@ -453,196 +258,20 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: poolid is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.poolid)
           status:
-            description: LxcStatus defines the observed state of Lxc.
+            description: PoolStatus defines the observed state of Pool.
             properties:
               atProvider:
                 properties:
-                  arch:
-                    type: string
-                  bwlimit:
-                    type: number
-                  clone:
-                    type: string
-                  cloneStorage:
-                    type: string
-                  cmode:
-                    type: string
-                  console:
-                    type: boolean
-                  cores:
-                    type: number
-                  cpulimit:
-                    type: number
-                  cpuunits:
-                    type: number
-                  currentNode:
-                    description: The node the qemu guest is currently on.
-                    type: string
-                  description:
-                    type: string
-                  features:
-                    items:
-                      properties:
-                        fuse:
-                          type: boolean
-                        keyctl:
-                          type: boolean
-                        mknod:
-                          type: boolean
-                        mount:
-                          type: string
-                        nesting:
-                          type: boolean
-                      type: object
-                    type: array
-                  force:
-                    type: boolean
-                  full:
-                    type: boolean
-                  hagroup:
-                    type: string
-                  hastate:
-                    type: string
-                  hookscript:
-                    type: string
-                  hostname:
+                  comment:
                     type: string
                   id:
                     type: string
-                  ignoreUnpackErrors:
-                    type: boolean
-                  lock:
+                  poolid:
                     type: string
-                  memory:
-                    type: number
-                  mountpoint:
-                    items:
-                      properties:
-                        acl:
-                          type: boolean
-                        backup:
-                          type: boolean
-                        file:
-                          type: string
-                        key:
-                          type: string
-                        mp:
-                          type: string
-                        quota:
-                          type: boolean
-                        replicate:
-                          type: boolean
-                        shared:
-                          type: boolean
-                        size:
-                          type: string
-                        slot:
-                          type: number
-                        storage:
-                          type: string
-                        volume:
-                          type: string
-                      type: object
-                    type: array
-                  nameserver:
-                    type: string
-                  network:
-                    items:
-                      properties:
-                        bridge:
-                          type: string
-                        firewall:
-                          type: boolean
-                        gw:
-                          type: string
-                        gw6:
-                          type: string
-                        hwaddr:
-                          type: string
-                        id:
-                          type: number
-                        ip:
-                          type: string
-                        ip6:
-                          type: string
-                        mtu:
-                          type: number
-                        name:
-                          type: string
-                        rate:
-                          type: number
-                        tag:
-                          type: number
-                        trunks:
-                          type: string
-                        type:
-                          type: string
-                      type: object
-                    type: array
-                  onboot:
-                    type: boolean
-                  ostemplate:
-                    type: string
-                  ostype:
-                    type: string
-                  pool:
-                    type: string
-                  protection:
-                    type: boolean
-                  restore:
-                    type: boolean
-                  rootfs:
-                    items:
-                      properties:
-                        acl:
-                          type: boolean
-                        quota:
-                          type: boolean
-                        replicate:
-                          type: boolean
-                        ro:
-                          type: boolean
-                        shared:
-                          type: boolean
-                        size:
-                          type: string
-                        storage:
-                          type: string
-                        volume:
-                          type: string
-                      type: object
-                    type: array
-                  searchdomain:
-                    type: string
-                  sshPublicKeys:
-                    type: string
-                  start:
-                    type: boolean
-                  startup:
-                    type: string
-                  swap:
-                    type: number
-                  tags:
-                    type: string
-                  targetNode:
-                    description: The node the lxc guest goes to.
-                    type: string
-                  template:
-                    type: boolean
-                  tty:
-                    type: number
-                  unique:
-                    type: boolean
-                  unprivileged:
-                    type: boolean
-                  unused:
-                    items:
-                      type: string
-                    type: array
-                  vmid:
-                    description: The VM identifier in proxmox (100-999999999)
-                    type: number
                 type: object
               conditions:
                 description: Conditions of the resource.
